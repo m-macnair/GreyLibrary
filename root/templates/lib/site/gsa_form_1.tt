@@ -1,0 +1,5 @@
+[% 
+	INCLUDE site/shared_templates/standard_form_1.tt
+	message = c.stash.message
+	content = c.stash.form_render
+%]

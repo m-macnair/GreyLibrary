@@ -1,0 +1,7 @@
+
+[% UNLESS path_to_static %][% path_to_static =   site.url.base _ 'static/shared_static/'%][% END %]
+[% UNLESS path_to_css %][% path_to_css = path_to_static _ 'shared_css' %][% END %]
+<link rel="stylesheet" type="text/css" href="[% path_to_css %]/standard_2.css" />
+<div id="standard_2">
+	[% content %]
+</div>

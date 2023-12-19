@@ -1,0 +1,24 @@
+[%# creates a standard html table from a DBI fetchrow_hashref as rows %]
+[% HEAD = 1 %]
+[% FOREACH row IN rows %]
+
+	[% IF HEAD == 1 %]
+		<table>
+		[% FILTER trim %]
+			<tr>
+			[% FOREACH key IN row.keys.sort %]
+				<td>[% key %]</td>
+			[% END %]
+			</tr>
+		[% HEAD = 0 %]
+		[% END %]
+	[% END %]
+[% FILTER trim %]
+		<tr>
+			[% FOREACH key IN row.keys.sort %]
+				<td>[% row.$key %]</td>
+			[% END %]
+		</tr>
+[% END %]
+[% END  %]
+</table>

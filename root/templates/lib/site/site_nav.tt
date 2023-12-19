@@ -1,0 +1,39 @@
+[% style_1 = 'style="width:initial; border:1px solid blue;"' %]
+<div class="full box " style="margin: 0px 11%;">
+	<div class="full box left" >
+		<form action="[% site.url.base %]forms/redirect_form" method="post">
+			<div class="half box">
+				<h4 class="left" style="width:auto;">Search for &nbsp;</h4>
+				<input class="left input_text" name="input" class="border_1"/>
+			</div>
+			<div class="half box">
+				<div class="box">&nbsp;in&nbsp;</div>
+				<input class="left" type="submit" name="tags" value="Tags" [% style_1 %] />
+				<input class="left" type="submit" name="jump" value="JumpCodes" [% style_1 %] />
+				<input class="left" type="submit" name="track_vote" value="Votes" [% style_1 %] />
+				<input class="left" type="submit" name="title" value="Title" [% style_1 %] />
+				<input type="hidden" name="submitted" value="submitted" />
+			</div>
+		</form>
+	</div>
+	<br/>
+	<div class="half box">
+		No Votes:
+		[% INCLUDE site/shared_templates/link_list.tt 
+			links = [
+				{url = '/track/unvoted', title = 'Track'}
+				{url = '/album/unvoted', title = 'Album '}
+			]
+		%]
+	</div>
+	<div class="half box">
+
+		[% INCLUDE site/shared_templates/link_list.tt 
+			links = [
+					{url = '/collection', title = 'Collection'}
+			]
+		%]
+	</div>	
+	
+
+</div>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+[%# FILTER collapse %]
+
+[% UNLESS path_to_static %][% path_to_static =   site.url.base _ 'static/shared_static/'%][% END %]
+[% UNLESS path_to_css %][% path_to_css = path_to_static _ 'shared_css' %][% END %]
+[% UNLESS path_to_img %][% path_to_img = path_to_static _ 'shared_images' %][% END %]
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>[% title %] | Grey Library.</title>
+	<link rel="stylesheet" type="text/css" href="[% path_to_css %]/gl_main.css" />
+	[%# pink used to go here %]
+	<span id="ps"></span>
+	<script type="text/javascript" src="/static/js/concessions.js" >
+	</script>
+</head>
+<body>
+	<!-- Bure bure bure bure -->
+	<div class="gokoma">
+		<div class="ki">
+			<div class="aikachi">
+
+				    <div class="lb fbox" style="margin-top:5px;margin-bottom:5px;"> 
+						<h2>[% site_title %]</h2>
+				    </div>
+			</div>
+		</div>
+		<div class="kyomi">
+			<div class="sho scroll"><!-- Fun things to go here later --><br />
+				<div class="fbox aikachi" style="width:88%; margin:0px;">
+						<span style="width:88%; margin:6%;">
+							[% IF c.session.user_id %]
+							<a href="/image/web/untagged">Untagged</a>
+							<a href="/user/wishlist/web">My Wishlist</a>
+							<a href="/auth/web/logout">Logout</a>
+							[% END %]
+						</span>
+						[% IF site_nav %][% INCLUDE $site_nav %][% END %]
+				</div>
+			</div>
+ 			<div class="ten" >
+				[% content %]
+			</div>
+			<div class="ketsu scroll">
+				[% IF sub_nav %][% INCLUDE $sub_nav %][% END %]
+				<span style="width:80%;font-size:.5em;align:center;" id ="ketsu_string" >[% c.stash.ketsu_string %]</span>
+				<img src="[% path_to_img %]/makers_mark_adjusted.svg" style="width: 50px; height:50px; float:right;"/>
+			</div>
+
+		</div>
+
+	</div>
+</body>
+[%# END  #/filter %]
+</html>

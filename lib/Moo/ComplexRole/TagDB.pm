@@ -6,8 +6,8 @@ use Moo::Role;
 use Carp;
 use Data::Dumper;
 
-our $VERSION = 'v1.0.5';
-##~ DIGEST : 95d6d47c9342aee2061f8d3a3fd12160
+our $VERSION = 'v1.0.7';
+##~ DIGEST : 315a90f3b9fd088d5965b8e3db76dfde
 
 =head1 NAME
 	Moo::Role::FileIDDB - CRUD for a db containing file paths 
@@ -52,8 +52,9 @@ ACCESSORS: {
 sub tag_subject_id {
 	my ( $self, $tag_string, $subject_id, $p ) = @_;
 	for my $tag ( split( ' ', $tag_string ) ) {
-		$self->add_tag_to_subject_id( $tag, $subject_id );
+		$self->add_tag_to_subject_id( $tag, $subject_id, $p );
 	}
+
 }
 
 sub set_tag_string_for_subject {
@@ -120,6 +121,10 @@ sub add_tag_to_subject_id {
 		tag_id     => $tag_id,
 		subject_id => $subject_id,
 	};
+
+	if ( $p->{user_id} ) {
+		$params->{user_id} = $p->{user_id};
+	}
 	$self->insert( 'tag_map', $params );
 	if ( $p->{want_id} ) {
 		my $row = $self->select( 'tag_map', $params )->fetchrow_hashref;

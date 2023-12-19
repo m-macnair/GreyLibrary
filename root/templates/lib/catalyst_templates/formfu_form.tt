@@ -1,0 +1,6 @@
+<div style="clear:both;">
+	<h1>[% c.stash.message %]</h1>
+	<div id="formfu_1">
+		[% c.stash.form.render %]
+	</div>
+</div>

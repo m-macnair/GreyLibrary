@@ -1,0 +1,37 @@
+@CHARSET "UTF-8";
+table{
+	display:block;
+	width:100%;
+	margin:0;
+	padding:0;
+	float:left;
+}
+
+th{
+
+}
+tr{
+
+	width:100%;
+	margin-bottom:4px;
+}
+td{
+	padding:3px;
+	width:100px;
+
+	margin:0;
+}
+
+.tbl2{
+	width:50%;
+}
+.tbl1 table{
+	width:100%;
+}
+.tbl1 td{
+	padding:1px;
+	margin-left:10px;
+	width:25%;
+}
+
+

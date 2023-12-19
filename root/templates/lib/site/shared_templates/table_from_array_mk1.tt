@@ -1,0 +1,20 @@
+[%# creates a standard html table from an array of arrays %]
+[% HEAD = 1 %]
+<table>
+[% FOREACH row IN rows %]
+	[% IF HEAD == 1 %]
+			<tr>
+			[% FOREACH cell IN row %]
+				<td>[% cell %]</td>
+			[% END %]
+			</tr>
+		[% HEAD = 0 %]
+	[% ELSE %]
+		<tr>
+			[% FOREACH cell IN row %]
+				<td>[% cell %]</td>
+			[% END %]
+		</tr>
+	[% END %]
+[% END %]
+</table>

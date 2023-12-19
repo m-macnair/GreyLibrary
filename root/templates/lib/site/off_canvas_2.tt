@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+[% FILTER collapse %]
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<title>Off Canvas Template for Bootstrap</title>
+		<!-- Bootstrap core CSS -->
+		<link href="[% site.url.base %]static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Custom styles for this template -->
+		<link href="[% site.url.base %]static/bootstrap/css/offcanvas.css" rel="stylesheet">
+	</head>
+	<body>
+		[% PROCESS nav_1.tt 
+			nav_additions =  nav_additions
+		%]
+		<div class="container">
+			<div class="row row-offcanvas row-offcanvas-left">
+				[%
+					PROCESS bootstrap_parts/off_canvas_multi_link.tt 
+					links = links
+				%]
+				<div class="col-xs-12 col-sm-9">
+				[% c.stash.message %]
+				</div>
+				<div class="col-xs-12 col-sm-9">
+
+					[% content %]
+				</div>[%# <!--/.col-xs-12.col-sm-9-->%]
+			</div>[%# <!--/row-->%]
+		</div>[%# <!--/.container--> %]
+		<footer class="footer">
+			<div class="container">
+			<ul class="nav navbar-nav">
+				[% FOR f IN footer %]
+					<li 
+						[% IF l.title == active %]class="active"[% END %]
+					><a href="[% f.url %]">[% f.title %]</a></li>				
+				[% END %]
+			</ul>
+			<div class="container">
+		</footer>
+		[% PROCESS js.tt %]
+		<script src="/static/offcanvas.js"></script>
+	</body>
+[% END  # /filter %]
+</html>

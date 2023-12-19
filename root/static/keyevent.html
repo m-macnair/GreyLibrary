@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body >
+
+<script>
+
+function httpGetAsync(theUrl, callback) {
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function() {
+		if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+			callback(xmlHttp.responseText);
+		}else {
+			callback(xmlHttp.status);
+		}
+	}
+	xmlHttp.open("GET", theUrl, true);
+	xmlHttp.send();
+
+}
+
+// Test the keyCode, key, and code properties
+document.addEventListener('keydown', event => {
+	httpGetAsync(
+		"http://localhost:3000/track/" + event.keyCode,
+		function(content) {
+			document.getElementById("content").innerHTML = content;
+		} 
+	);
+});
+
+</script>
+
+<div id ="content">
+Funky Fresh Beats!
+</div>
+
+</body>
+
+
+</html>

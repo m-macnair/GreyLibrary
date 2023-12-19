@@ -1,0 +1,66 @@
+/*try universal inherit at least once in your life */
+@charset "UTF-8";
+#formfu_1 .submit{
+}
+#formfu_1 div.form_cell{
+	width:100%;
+	height:auto;
+	margin-bottom:5px;
+}
+#formfu_1{
+	width:98%;
+	margin:1%;
+	clear:both;
+}
+#formfu_1 *{
+	margin:0;
+}
+#formfu_1 div{
+	float:left;
+	clear:both;
+	min-width:50%;
+	display:inline-block;
+}
+#formfu_1 textarea{
+	width:97%;
+	float:left;
+
+}
+#formfu_1 label{
+	width:40%;
+	display:inline-block;	
+	margin:0;
+	float:left;
+}
+
+#formfu_1 .checkbox input[type="checkbox"] {
+	transform: scale(2); 
+	margin:2.5%;
+}
+#formfu_1 .checkbox{
+	margin:2px 0 ;
+}
+
+#formfu_1 input, #formfu_1 button{
+	display:block;
+	width:45%;
+	float:left;
+	clear:left;
+	margin:0px;
+	
+	-webkit-border-top-right-radius: 8px;
+	-moz-border-radius-topright: 8px;
+	border-top-right-radius: 8px;
+}
+
+#formfu_1 .upload_1 {
+	width: 320px; 
+	height: 22px; 
+	margin: 0; 
+	-webkit-box-sizing: border-box; 
+	-moz-box-sizing: border-box;
+}
+
+#formfu_1 div.label {
+	width:100%;
+}

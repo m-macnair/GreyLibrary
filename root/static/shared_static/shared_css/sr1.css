@@ -1,0 +1,244 @@
+#sr *{
+	font-family:Arial;
+	border-color: #CCC;
+	color: #11416C;
+	text-decoration:none;
+	white-space: nowrap;
+}
+#sr{
+	border:none;
+	margin:none;
+	width:auto;
+	padding:none;
+}
+#sr  p, #sr  h2, #sr  h3{
+	white-space:normal;
+	margin: 2px 0 3px 0;
+}
+
+#sr  h1{
+    margin: 3px 0 5px 0;
+}
+#sr div, #sr ul, #sr li, #sr a, #sr href{
+	display:inherit;
+}
+
+
+#sr  .alt{
+	background-color:#CACAFF;
+}
+#sr a{
+
+	text-decoration:underline;	
+	color:#000080;
+	
+}
+#sr a:hover{
+	background-color:#AAAAFF;
+}
+
+#sr  head{
+	display:none;
+}
+#sr script{
+	display:none;
+}
+
+
+#sr div{
+	float:left;
+}
+#sr  .ten div{
+	
+	border: 1px dotted;
+	border-top:none;
+	border-color:#FFF;
+}
+#sr  div.site_block{
+	width:95%;
+	margin:0% 2.5% 0 2.5%;
+	border:none;
+}
+
+#sr  div.header{
+	min-height:65px;
+	border-bottom:0;
+	margin: 0 2.5% 0 2.5%;
+	width: 95%;
+}
+
+#sr  div.sub_header{
+	min-height:32px;
+	margin: 0 5% 0 5%;
+	width: 90%;
+}
+
+#sr  div.aikachi{
+	margin-top: 0;
+	border:none;
+}
+
+#sr  .aikachi a{
+
+	text-decoration:none;
+	font-family:"Courier New", #sr  Courier, #sr  monospace;
+	font-weight:bold;
+	font-size:1.6em;
+	color:#0000FF;
+}
+
+#sr  div.central{
+	border:none;
+	border-top:1px solid #00F;
+	border-bottom:1px solid #00F;
+	width:100%;
+	min-height:50%;
+}
+
+
+#sr .lb{
+float:left;
+}
+#sr .rb{
+	float:right;
+}
+
+#sr .rb *{
+	border:none;
+	display: inline;
+	float:right;
+	width:auto;
+}
+#sr div.box{
+	width:50%;
+	margin:0;
+	border:none;
+}
+#sr div.sbox{
+	width:30%;
+	margin:0;
+	padding:0;
+}
+#sr div.fbox{
+	width:100%;
+	margin:0;
+	padding:0;
+}
+#sr ul{
+	display:inline;
+}
+#sr li{
+	margin:2px;
+}
+#sr .class1 li{
+	margin-left:5px;
+}
+
+#sr  .bl *{
+	display:block;
+}
+#sr  .parade img{
+	margin:2px;
+	width:30px;
+	height:20px;
+	border:1px solid #DDD;
+	float:right;
+}
+#opt_1{
+	border:0;
+}
+#opt_2{
+	font-size:.8em;
+	width:100%;
+	padding:0;
+}
+#sr .small{
+	font-size:.6em;
+}
+#sr .bold{
+
+	font-weight:bold;
+	font-size:1.2em;
+}
+#sr .max{
+	margin:0px;
+	padding:0px;
+	width:100%;
+	height:100%;
+}
+#sr input, #sr select, #sr button{
+	background-color:#EEF;
+	width:49%;
+	float:right;
+	margin:.5%;
+	border: 1px solid #000;
+}
+#sr div.quart{
+      width:25%;
+}
+#sr .ul1 li, #sr  .ul2 li{
+  display:block;
+  clear:both;
+}
+#sr ul.ul1, #sr ul.ul2{
+  margin-top:10px;    
+}
+#sr label{
+	width:49%;
+	float:left;
+	margin:.5%;
+}
+#sr .textarea label{
+	width:100%;
+}
+#sr textarea{
+	background-color:#EEF;
+	margin:.5%;
+	float:left;
+	clear:both;
+	width:99%;
+	columns:5;
+	border: 1px solid #000;	
+
+}
+
+#sr button {
+	-moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+	box-shadow:inset 0px 1px 0px 0px #ffffff;
+	background-color:transparent;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #dcdcdc;
+	display:inline-block;
+	color:#363036;
+	font-family:Verdana;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:1px 1px 0px #ffffff;
+}
+
+#sr button:active {
+	position:relative;
+	top:1px;
+}
+
+#sr .content{
+	margin: 0 7.5% 0 7.5%;
+	width: 85%;
+	min-height:100px;
+	border:none;
+}
+#sr div.footer {
+	border: medium none;
+	font-family: 'century gothic',arial,helvetica,sans-serif;
+	margin-top: 10px;
+}
+
+#sr .border_1{
+	  border-style: solid;
+	  border-width: 1px;
+}

@@ -1,0 +1,3 @@
+<style>
+[% INCLUDE "combined_css_files/standard_2.css" %]
+</style>

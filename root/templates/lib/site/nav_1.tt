@@ -1,0 +1,46 @@
+[%
+	nav = []
+%]
+[% IF c.session.user_id %]
+		[%
+				nav = [
+				{
+					url => '/search'
+					title => 'Search'
+				},
+				
+				{
+					url => '/okazu/add/'
+					title => 'Upload'
+				},
+				
+				{
+					url => '/groups/'
+					title => 'Collections'
+				},
+				
+				{
+					url => '/user/logout',
+					title => 'Logout',
+				}
+			],
+		%]
+	[% ELSE %]
+		[%
+			nav = [{
+				url => '/user/login',
+				title => 'Log in',
+			}]
+		%]
+[% END %]
+[%
+	
+	nav = nav.merge(nav_additions)
+%]
+
+[% INCLUDE bootstrap_parts/nav.tt
+	active = active
+	title = 'AseChan'
+
+
+%]

@@ -1,0 +1,57 @@
+* {
+	border: none;
+	clear: inherit;
+	color: inherit;
+	font-family: inherit;
+	margin: inherit;
+	padding: inherit;
+	text-decoration: none;
+	white-space: nowrap;
+	width: inherit;
+} 
+
+.full{
+	width:100%;
+	margin:0;
+	padding:0;
+}
+
+.half{
+	width:100%;
+	margin:0;
+	padding:0;
+}
+
+.fancy_full{
+	width:96%;
+	margin:1%;
+	padding:1%;
+}
+
+.fancy_half{
+	width:48%;
+	margin:1%;
+	padding:1%;
+}
+
+.third { 
+	width:31%;
+	margin:1%;
+	
+}
+
+.wide_list{
+	display:inline;
+}
+
+.wide_list li{
+	float:left;
+}
+
+.long_list{
+	display:block;
+}
+
+.long_list li{
+	float:left;
+}

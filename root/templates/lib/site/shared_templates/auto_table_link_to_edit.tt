@@ -1,0 +1,38 @@
+[%# 
+	creates a standard html table from a DBIx ->all result along with links to edit on the id field 
+	due to some odd combination of TT and DBIx get_columns() will result in an array and not a hash, hence explicit column headings are required
+	does mean it's simpler to get the right order admittedly
+%]
+
+[% HEAD = 1 %]
+
+<br/>
+<table>
+	[% WHILE (row =  rs.next) %]
+		[% IF HEAD == 1 %]
+			[% FILTER trim %]
+			<tr>
+				[% FOREACH key IN headings %]
+					<td>[% key %]</td>
+				[% END %]
+			</tr>
+			[% END %]
+			[% HEAD = 0 %]
+		[% END %]
+		[% FILTER trim %]
+			<tr>
+				[% FOREACH key IN headings %]
+					[% IF key == edit_key %]
+						<td>
+							<a href="[% edit %]/[% row.$key %]">
+								Edit [% row.$key %]
+							</a>
+						</td>
+					[% ELSE %]
+						<td>[% row.$key %]</td>
+					[% END %]
+				[% END %]
+			</tr>
+		[% END %]
+	[% END  %]
+</table>

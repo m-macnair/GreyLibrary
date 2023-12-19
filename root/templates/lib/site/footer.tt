@@ -1,0 +1,13 @@
+<div style="width:100%;" class="[% classes %]">
+	<div class="container" >
+		<!-- Example row of columns -->
+		<div class="row">
+			[% FOR column IN columns %]
+				<div class="col-md-4">
+					<h2>[% column.heading %]</h2>
+					[% column.body %]
+				</div>
+			[% END %]
+		</div>
+	</div> 
+</div>

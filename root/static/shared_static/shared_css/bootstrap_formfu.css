@@ -1,0 +1,100 @@
+/*try universal inherit at least once in your life */
+@charset "UTF-8";
+#formfu_2 {
+	display: block;
+	float: left;
+}
+#formfu_2 * {
+	border: none;
+	clear: inherit;
+	color: inherit;
+	font-family: Arial;
+	margin: inherit;
+	padding: inherit;
+	text-decoration: none;
+	white-space: nowrap;
+	width: inherit;
+}
+
+#formfu_2 div{
+	padding: 0px;
+	border:1px solid #AAA;
+}
+#formfu_2 div.form_cell{
+	width:100%;
+	height:auto;
+	margin-bottom:5px;
+}
+#formfu_2{
+	width:98%;
+	margin:1%;
+	clear:both;
+}
+#formfu_2 *{
+	margin:0;
+}
+#formfu_2 div{
+	float:left;
+	clear:both;
+	min-width:50%;
+	display:inline-block;
+}
+#formfu_2 textarea{
+	width:97%;
+	float:left;
+
+}
+#formfu_2 label{
+	width:30%;
+	display:block;
+	margin:0;
+	float:left;
+	clear:none;
+}
+
+#formfu_2 .checkbox input[type="checkbox"] {
+	transform: scale(2); 
+	margin:2.5%;
+}
+#formfu_2 .checkbox{
+	margin:2px 0 ;
+}
+
+#formfu_2 input, 
+#formfu_2 button{
+	clear:none;
+	width:45%;
+	float:left;
+	margin:0px;
+
+	color:333;
+
+}
+
+#formfu_2 .upload_1 {
+	width: 70%; 
+	height: 22px; 
+	display:inline-block;
+	float:left;
+
+}
+
+#formfu_2 div.label {
+	width:100%;
+}
+
+#formfu_2 .curved{
+	-webkit-border-bottom-right-radius: 8px;
+	-moz-border-radius-bottomright: 8px;
+	border-bottom-right-radius: 8px;
+}
+
+#formfu_2 .last{
+	width:50%;
+}
+#formfu_2 input{
+	width:100%;
+	-webkit-border-bottom-right-radius: inherit;
+	-moz-border-radius-bottomright: inherit;
+	border-bottom-right-radius: inherit;
+}

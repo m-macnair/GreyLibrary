@@ -1,0 +1,57 @@
+/* YaaPC */ 
+*{
+	border-color:#DDD;
+}
+
+div{
+	border: 1px solid #DDD;
+}
+.ghost_links a:hover{
+	background-color:#AAAAFF;
+}
+
+.shadow_l{
+	box-shadow: 3px 3px 2px #888;
+}
+.shadow_s{
+	box-shadow: 1px 1px 2px #888;
+}
+tr.alt{
+	background-color:#CACAFF;
+}
+
+div.kyomi{
+	border:none;
+	border-top:1px solid #F00;
+	border-bottom:1px solid #F00;
+}
+
+
+.table1 tr:hover{
+	background-color: #EEE;
+}
+
+.error{
+	background-color:#FFF0F0;
+	border-color:#FAA;
+}
+
+.error input {
+		background-color:#FAA;
+}
+
+.ghost:hover{
+	background-color:#EEE;
+}
+
+body{
+
+}
+
+input,select,button,textarea{
+	background-color:#EEF;
+}
+
+a.link2{
+	text-decoration: underline;
+}

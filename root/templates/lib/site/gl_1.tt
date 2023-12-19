@@ -1,0 +1,8 @@
+[% WRAPPER 
+	site/shared_templates/standard_1.tt 
+	site_title = "Grey Library"
+	sub_nav = c.stash.sub_nav || sub_nav 
+	
+%]
+[% PROCESS site/shared_templates/standard_2.tt %]
+[% END %]

@@ -1,0 +1,21 @@
+---
+load_config_file:
+  - shared_formfu/sr_default_1.yml
+---
+indicator: submitted
+elements:
+- type: File
+  label: Upload 
+  name: upload
+  constraints:
+    - type: Required
+  attributes:
+    class: upload_1
+  container_attributes: 
+    class: curved    
+    
+- type: Submit
+  container_attributes: 
+    class: curved last
+  name: submitted
+  value: Submit 

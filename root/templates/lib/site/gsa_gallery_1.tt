@@ -1,0 +1,10 @@
+
+[% floating_title %]
+[% FOR e IN c.stash.gallery_structure %]
+	<div class="full box">
+		<p class="full">
+		([% e.performer_name %])
+		<a href="[% site.url.base %]track/[% e.track_id %]">[% e.title %]</a>
+		[[% e.vote %]]
+	</div>
+[% END %]

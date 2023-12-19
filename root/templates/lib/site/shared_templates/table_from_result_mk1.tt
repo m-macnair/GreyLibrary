@@ -1,0 +1,19 @@
+[%# creates a standard html table from a DBI fetchrow_hashref as rows %]
+[% HEAD = 1 %]
+[% FOREACH row IN rows %]
+	[% IF HEAD == 1 %]
+		<table>
+			<tr>
+			[% FOREACH key IN hash.keys.sort %]
+				<td>[% key %]</td>
+			[% END %]
+			</tr>
+		[% HEAD = 0 %]
+	[% ELSE %]
+		<tr>
+			[% FOREACH key IN hash.keys.sort %]
+				<td>[% hash.$key %]</td>
+			[% END %]
+		</tr>
+	[% END %]
+</table>

@@ -1,0 +1,128 @@
+<div class="fancy_full box" style="min-height:600px">
+	<div class="full box" style="max-height:600px">
+		<a id="page_link" href="[% img_url %]">
+			<img id="page_image" src="[% img_url %]" style="max-height:400px;width:auto;float:center;"/>
+		</a>
+	</div>
+		<script> 
+		
+		var previous_stack = [];
+		var next_stack = [];
+		
+		var current = { 
+			image_id: [% image_id %],
+		
+		};
+
+			
+		function tag_button (tag_string) { 
+			send_tag_string(tag_string);
+			this_button = document.getElementById(tag_string + "_button");
+			this_button.disabled = true;
+			this_button.style.backgroundColor = "orange";
+		}
+			
+		function send_tag_string(tag_string) {
+			id = current.image_id;
+			get_url("/image/api/tag_file/" + id + "/" + tag_string); 
+		}
+		function get_next_json(want_count){
+			res_string = get_url("/image/api/get_untagged/" + want_count); 
+			return safelyParseJSON(res_string);
+		}
+		
+		function get_url(this_url){
+			var xhr = new XMLHttpRequest(); 		
+			/* async is the default here, causing newb problems */
+			xhr.open("GET", this_url, false);
+			xhr.send();
+			return xhr.response;
+		}
+		function want() {
+			send_tag_string('want');
+			keep();
+		}
+		function problem() {
+			send_tag_string('problem');
+			next_assets();
+		}
+		
+		function keep() {
+			send_tag_string('keep');
+			next_assets();
+		}
+		
+		function toss() {
+			send_tag_string('toss');
+			next_assets();
+		}
+		function next_assets() {
+			[% FOREACH tag IN c.stash.tags %]
+				
+				document.getElementById("[% tag %]_button").disabled = false;
+				document.getElementById("[% tag %]_button").style.backgroundColor = '';
+			[% END %]
+			
+			if(next_stack.length == 0 ){
+				new_data = get_next_json(10);
+				new_data.forEach(function(item) {
+				
+					var img=new Image();
+					img.src= item.image_url;
+					next_stack.push(item); 
+				});
+			}
+			previous_stack.push(current);
+			
+			current = next_stack.shift();
+			console.log(next_stack);
+			
+			document.getElementById('page_image').src = current.image_url;
+			document.getElementById('page_link').href = current.image_url;
+			document.getElementById('ketsu_string').textContent = current.ketsu_string;
+			
+		}
+		
+		
+		function safelyParseJSON(jsonString) {
+			
+			try { 
+				var data = JSON.parse(jsonString);
+				//console.log("Parsed data:", data);
+				return data;
+			} catch (error) { console.log("Error parsing JSON:", error);
+		} }
+
+	</script>
+	
+	
+	<div class="full box" style="min-height:200px;">
+		<button class="tag_button" style="background-color:#ff2a2aff;" onclick="toss()" >Toss</button>
+
+		<button class="tag_button" style="background-color:#2aff80ff;" onclick="keep()" >Keep</button>
+				<button class="tag_button" style="background-color:#2a7fffff;" onclick="want()" >Want</button>
+		<button class="tag_button" style="background-color:black; color:white;" onclick="problem()" >Problem</button>
+	</div>
+	
+
+	
+	<div class="full box" >
+		<div class="third_wide" >
+			[% FOREACH tag IN c.stash.tags_left %]
+				<button class="tag_button" id="[% tag %]_button" onclick="tag_button( '[% tag %]')" >[% tag %]</button>
+			[% END %]
+		</div>
+		<div class="third_wide" >
+			[% FOREACH tag IN c.stash.tags_mid %]
+				<button class="tag_button" id="[% tag %]_button" onclick="tag_button( '[% tag %]')" >[% tag %]</button>
+			[% END %] 		
+		</div>
+		<div class="third_wide" >
+			[% FOREACH tag IN c.stash.tags_right %]
+				<button class="tag_button" id="[% tag %]_button" onclick="tag_button( '[% tag %]')" >[% tag %]</button>
+			[% END %]
+		</div>
+	</div>
+	
+	
+</div>

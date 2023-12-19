@@ -1,0 +1,8 @@
+<div class="fancy_full box" style="min-height:600px">
+	<div class="full box" style="max-height:600px">
+	
+		[% FOR row IN c.stash.wish_list_rows %]
+			<a href="/image/web/get_image_id/[% row.0 %]">[% row.0 %]</a>,
+		[% END %]
+	</div>
+</div>

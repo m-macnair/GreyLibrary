@@ -6,8 +6,8 @@ use Moo::Role;
 use Carp;
 use Data::Dumper;
 
-our $VERSION = 'v1.0.1';
-##~ DIGEST : 7e2d5d23feed550451e8c8de7dcf1a3d
+our $VERSION = 'v1.0.2';
+##~ DIGEST : d559c2be86c4aa5a62014d53a920e214
 
 =head1 NAME
 	Moo::Role::FileIDDB - CRUD for a db containing file paths 
@@ -161,6 +161,9 @@ sub find_id_path {
 	my ( $self, $file_id, $p ) = @_;
 	$self->get_path_sth->execute( $file_id );
 	my $row = $self->get_path_sth->fetchrow_hashref();
+	if ( wantarray ) {
+		return ( "$row->{directory}$row->{file_name}$row->{suffix}", $row );
+	}
 	return "$row->{directory}$row->{file_name}$row->{suffix}";
 
 }

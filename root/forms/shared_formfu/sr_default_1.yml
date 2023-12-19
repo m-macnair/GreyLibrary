@@ -1,0 +1,23 @@
+---
+auto_container_class: '%t'
+auto_container_label_class: 'label'
+auto_container_error_class: 'error'
+
+default_args:
+  elements:
+    Textarea:
+      rows: 3
+    Select:
+      attributes:
+        class: input_dropdown
+
+      
+#       auto_id
+# 
+# If set, then the field will be given an id attribute, if it doesn't have one already.
+# 
+# E.g., setting $form->auto_id('%n') will make each field have an ID the same as the field's name. This makes our form config simpler, and ensures we don't need to manually update IDs if any field names are changed.
+# 
+# Supports substitutions: %f, %n, %r.
+# 
+# Is an inheriting accessor.

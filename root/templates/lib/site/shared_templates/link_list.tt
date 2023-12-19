@@ -1,0 +1,5 @@
+<ul>
+	[% FOR o IN links  %]
+		<li><a href="[% o.url %]">[% o.title %]</a> </li>
+	[% END %]
+</ul> 

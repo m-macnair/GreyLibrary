@@ -1,0 +1,5 @@
+<ul>
+	[% WHILE ( tag = rs.next) %]
+		<li><a href="[% string_search_url %][% tag.tag_def.name %]">[% tag.tag_def.name %]</a></li>
+	[% END %]
+</ul>

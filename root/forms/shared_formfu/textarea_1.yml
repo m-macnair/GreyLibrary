@@ -1,0 +1,12 @@
+---
+load_config_file:
+  - shared_formfu/sr_default_1.yml
+---
+indicator: submitted
+elements:
+- type: Textarea
+  label: Text
+  name: input
+- type: Submit
+  name: submitted
+  value: Submit   

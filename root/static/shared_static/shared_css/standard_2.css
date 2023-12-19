@@ -1,0 +1,75 @@
+#standard_2 * {
+	border: none;
+	clear: inherit;
+	color: inherit;
+	font-family: inherit;
+	margin: inherit;
+	padding: inherit;
+	text-decoration: none;
+	white-space: normal;
+	width: inherit;
+} 
+
+#standard_2 .full{
+	width:100%;
+	margin:0;
+	padding:0;
+}
+
+#standard_2 .half{
+	width: 50%;
+	margin:0;
+	padding:0;
+}
+
+#standard_2 .fancy_full{
+	width:98%;
+	margin:1%;
+	padding:1%;
+}
+
+#standard_2 .fancy_half{
+	width:46%;
+	margin:1%;
+	padding:1%;
+}
+
+#standard_2 .wide_list{
+	display:inline;
+}
+
+#standard_2 .wide_list li{
+	float:left;
+}
+
+#standard_2 .long_list{
+	display:block;
+}
+
+#standard_2 .long_list li{
+	float:left;
+}
+#standard_2 a{
+	color: #00C;
+	display: inline;
+}
+#standard_2 a, 
+#standard_2 p,
+#standard_2 strong
+{
+	width: auto;
+	clear: none;
+	margin: 0px;
+	border: 0px;
+	padding:0px;
+	display: inline;
+}
+
+#standard_2 a:visited{
+	color: #F00;
+}
+
+#standard_2 .box{
+	float:left;
+	position:relative;
+}

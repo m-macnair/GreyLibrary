@@ -1,0 +1,3 @@
+<a href="./[% c.stash.back %]">Back</a> 
+[% c.stash.test %]
+<a href="./[% c.stash.next %]">Next</a> 

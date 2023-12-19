@@ -1,0 +1,5 @@
+[% WRAPPER standard_1.tt %]
+test
+
+
+[% END %]
