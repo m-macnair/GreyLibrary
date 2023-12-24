@@ -56,6 +56,34 @@ sub get_untagged : Local : CaptureArgs(1) {
 	$c->response->body( $response_json );
 }
 
+sub get_untagged_four_cell : Local {
+	my ( $self, $c, $offset ) = @_;
+
+	my $stack = $c->forward( qw/GreyLibrary::Controller::Image get_untagged/, [ 1, $offset ] );
+
+	$c->stash(
+		{
+			get_thumb_url => '/image/web/get_thumb_id/',
+			no_wrapper    => 1
+		}
+	);
+
+	$c->response->body(
+		my $content = $c->forward(
+			$c->view( 'TT' ),
+			"render",
+			[
+				'component/gallery_four_cell.tt',
+				{
+					this_id => $stack->[0]->{image_id},
+					WRAPPER => '',
+				}
+			]
+		)
+	);
+
+}
+
 =encoding utf8
 
 =head1 AUTHOR

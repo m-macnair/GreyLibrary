@@ -2,11 +2,16 @@ package GreyLibrary::Controller::Image;
 use Moose;
 use namespace::autoclean;
 
-BEGIN { extends 'Catalyst::Controller'; }
+BEGIN {
+	extends 'Catalyst::Controller';
+}
 
-sub get_untagged : Private : CaptureArgs(1) {
-	my ( $self, $c, $want ) = @_;
-	$want ||= 1;
+sub get_untagged : Private : CaptureArgs(2) {
+	my ( $self, $c, $want, $offset ) = @_;
+	$want   ||= 1;
+	$offset ||= 0;
+	warn "want: $want";
+	warn "offset: $offset";
 	my $res = $c->model( 'SQLiteDB' )->query(
 		q<
 		select f.rowid 
@@ -19,8 +24,9 @@ sub get_untagged : Private : CaptureArgs(1) {
 			m.rowid is null
 		and
 			s.suffix = ".jpg"
-		limit ?
-	>, $want
+		LIMIT ?
+		OFFSET ?
+	>, $want, $offset
 	);
 	my @response_stack;
 
@@ -38,6 +44,12 @@ sub get_untagged : Private : CaptureArgs(1) {
 	}
 	return \@response_stack;
 
+}
+
+sub search_string : Private : Args(2) {
+	my ( $self, $c, $string, $want, $page ) = @_;
+	my $results = $self->search_string( $string, $want, $page );
+	return $results;
 }
 
 __PACKAGE__->meta->make_immutable;

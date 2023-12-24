@@ -6,8 +6,8 @@ use Moo::Role;
 use Carp;
 use Data::Dumper;
 
-our $VERSION = 'v1.0.2';
-##~ DIGEST : d559c2be86c4aa5a62014d53a920e214
+our $VERSION = 'v1.0.3';
+##~ DIGEST : f8a2fd93b460140f3966102f4413850d
 
 =head1 NAME
 	Moo::Role::FileIDDB - CRUD for a db containing file paths 
@@ -38,6 +38,11 @@ ACCESSORS: {
 			my ( $self ) = @_;
 			return $self->dbh->prepare( "select * from directory where directory = ?" );
 		}
+	);
+
+	has augment_directory_sub => (
+		is   => 'rw',
+		lazy => 1,
 	);
 
 	has get_path_sth => (
@@ -157,15 +162,55 @@ sub find_name_id {
 	return $row->{rowid};
 }
 
+sub augment_directory {
+	my ( $self, $path ) = @_;
+	if ( defined( $self->augment_directory_sub ) ) {
+		my $ref = $self->augment_directory_sub();
+		$path = &$ref( $path );
+
+	}
+	return $path;
+
+}
+
 sub find_id_path {
 	my ( $self, $file_id, $p ) = @_;
 	$self->get_path_sth->execute( $file_id );
-	my $row = $self->get_path_sth->fetchrow_hashref();
+	my $row       = $self->get_path_sth->fetchrow_hashref();
+	my $directory = $self->augment_directory( $row->{directory} );
 	if ( wantarray ) {
-		return ( "$row->{directory}$row->{file_name}$row->{suffix}", $row );
+		return ( "$directory$row->{file_name}$row->{suffix}", $row );
 	}
-	return "$row->{directory}$row->{file_name}$row->{suffix}";
 
+	return "$directory$row->{file_name}$row->{suffix}";
+
+}
+
+sub generate_store_subject_md5 {
+	my ( $self, $file_id ) = @_;
+	my $row = $self->select(
+		'subject_md5',
+		[qw/*/],
+		{
+			subject_id => $file_id
+		}
+	)->fetchrow_hashref();
+	if ( $row ) {
+		return $row->{md5};
+	} else {
+		my $path       = $self->find_id_path( $file_id );
+		my $md5_string = `md5sum "$path"`;
+		( $md5_string ) = split( /\s+/, $md5_string );
+
+		$self->insert(
+			'subject_md5',
+			{
+				subject_id => $file_id,
+				md5        => $md5_string
+			}
+		);
+		return $md5_string;
+	}
 }
 
 1;

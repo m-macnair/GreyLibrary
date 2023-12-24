@@ -1,0 +1,14 @@
+<div id="cell">
+<div id="cell_[% this_id %]">
+	<h3>[% this_id %]</h3>
+	<button  style="background-color:#2a7fffff;clear:both;width:300px;height:30px;margin-left:30px;" onclick="want([% this_id %])" >Want</button>
+	<div>
+	<button  style="background-color:#ff2a2aff;float:left;width:30px;height:300px;" onclick="toss([% this_id %])" >Toss</button>
+	<a href="/image/web/[% this_id %]">
+		<img src="[% c.stash.get_thumb_url %][% this_id %]" style="height:300px;width:300px;float:left;"> </img>
+	</a>
+	<button  style="background-color:#2aff80ff;float:left;width:30px;height:300px;" onclick="keep([% this_id %])" >Keep</button>
+	</div>
+	<button  style="background-color:black; color:white;width:300px;height:30px;margin-left:30px;float:left;" onclick="problem([% this_id %])" >Problem</button>
+</div>
+</div>

@@ -1,0 +1,22 @@
+<script type="text/javascript" src="/static/gallery.js"></script>
+
+<div class="fancy_full box" style="min-height:600px">
+	<div class="full box" style="max-height:600px">
+		<a id="page_link" href="[% img_url %]">
+			<img id="page_image" src="[% img_url %]" style="max-height:400px;width:auto;float:center;"/>
+		</a>
+	</div>
+	
+	<div class="full box" style="min-height:200px;" id="gallery_div">
+		[% FOR this_id IN c.stash.gallery_ids %]
+			[% INCLUDE "component/gallery_four_cell.tt" this_id = this_id %]
+		[% END %]
+	</div>
+	<div>
+		[% IF c.stash.search_page > 1  %]
+			<a href="/image/web/search_gallery/[%c.stash.search_page - 1 %]">Previous</a>
+		[% END %]
+		<a href="/image/web/search_gallery/[%c.stash.search_page + 1 %]">Next</a>
+	</div>
+</div>
+

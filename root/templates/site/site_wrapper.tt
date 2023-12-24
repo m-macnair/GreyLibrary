@@ -1,0 +1,8 @@
+[% IF template.custom_wrapper;
+PROCESS c.stash.custom_wrapper;
+ELSIF c.stash.no_wrapper || template.no_wrapper;
+content;
+ELSE;
+PROCESS 'site/gl_1.tt';
+END
+%]

@@ -11,8 +11,8 @@
 	<link rel="stylesheet" type="text/css" href="[% path_to_css %]/gl_main.css" />
 	[%# pink used to go here %]
 	<span id="ps"></span>
-	<script type="text/javascript" src="/static/js/concessions.js" >
-	</script>
+	
+	<script type="text/javascript" src="/static/site.js"></script>
 </head>
 <body>
 	<!-- Bure bure bure bure -->
@@ -30,9 +30,16 @@
 				<div class="fbox aikachi" style="width:88%; margin:0px;">
 						<span style="width:88%; margin:6%;">
 							[% IF c.session.user_id %]
-							<a href="/image/web/untagged">Untagged</a>
+							<a href="/image/web/untagged_gallery">Untagged Gallery</a>
 							<a href="/user/wishlist/web">My Wishlist</a>
+							<div style = "width:200px;clear:none;float:left;margin:0;border:0;" >
+								<form action="/image/web/search_string_form" method="post" >
+									<input type="text" id="name" name="search_string", style ="clear:none; width:75%; black;border: .3px solid black;" />
+									<input type="submit" value="Search" style ="clear:none; width:25%;" /> 
+								</form>
+							</div>
 							<a href="/auth/web/logout">Logout</a>
+						
 							[% END %]
 						</span>
 						[% IF site_nav %][% INCLUDE $site_nav %][% END %]

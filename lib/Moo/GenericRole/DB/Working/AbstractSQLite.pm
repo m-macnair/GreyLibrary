@@ -1,7 +1,7 @@
 #ABSTRACT: Use DBI::Abstract and SQLite for arbitrary working databases
 package Moo::GenericRole::DB::Working::AbstractSQLite;
-our $VERSION = 'v1.1.2';
-##~ DIGEST : 0bdc4f6495a01f10d16761b5fb8c1e8e
+our $VERSION = 'v1.1.3';
+##~ DIGEST : 63cf14170e194fd4e5b29ef0eb92229c
 use Try::Tiny;
 use Moo::Role;
 use Carp;
@@ -33,7 +33,7 @@ sub copy_working_db {
 sub setup_working_db {
 	my ( $self, $source_db, $opt ) = @_;
 	$opt ||= {};
-	my $dbh = DBI->connect( 'dbi:SQLite:dbname=' . $self->temp_db_path() );
+	my $dbh = DBI->connect( 'dbi:SQLite:dbname=' . $self->temp_db_path() ) or die $DBI::errstr;
 	$self->dbh( $dbh );
 }
 
