@@ -1,0 +1,46 @@
+Subject ID
+Subject Hash
+break local paths into individual searchable lower case tags 
+
+
+CREATE TABLE file (
+    name TEXT,
+    directory_id INTEGER,
+    suffix_id INTEGER,
+    size INTEGER,
+    md5 TEXT,
+    sha1 TEXT,
+    ed2k TEXT
+);
+
+CREATE INDEX file_md5 ON file (md5);
+CREATE INDEX file_sha1 ON file (sha1);
+CREATE INDEX file_ed2k ON file (ed2k);
+CREATE INDEX file_directory_id ON file (directory_id);
+
+
+CREATE TABLE tag_map (
+    tag_id INTEGER,
+    subject_id INTEGER,
+    source_id INTEGER default null
+);
+
+CREATE INDEX tag_map_tag_id ON tag_map (tag_id);
+CREATE INDEX tag_map_subject_id ON tag_map (subject_id);
+CREATE INDEX tag_map_source_id ON tag_map (source_id);
+
+
+
+CREATE TABLE file (
+    file_name TEXT,
+    directory_id INTEGER,
+    suffix_id INTEGER,
+    size INTEGER,
+    md5 TEXT,
+    sha1 TEXT,
+    ed2k TEXT
+);
+CREATE INDEX file_md5 ON file (md5);
+CREATE INDEX file_sha1 ON file (sha1);
+CREATE INDEX file_ed2k ON file (ed2k);
+CREATE INDEX file_directory_id ON file (directory_id);

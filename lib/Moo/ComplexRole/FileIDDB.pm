@@ -1,4 +1,4 @@
-#ABSTRACT: coherent system to store arbitrary files as IDs
+#ABSTRACT: coherent system to store arbitrary file as IDs
 package Moo::ComplexRole::FileIDDB;
 use strict;
 use warnings;
@@ -6,8 +6,8 @@ use Moo::Role;
 use Carp;
 use Data::Dumper;
 
-our $VERSION = 'v1.0.3';
-##~ DIGEST : f8a2fd93b460140f3966102f4413850d
+our $VERSION = 'v1.0.4';
+##~ DIGEST : c88d81585082eafc18564148c5543141
 
 =head1 NAME
 	Moo::Role::FileIDDB - CRUD for a db containing file paths 
@@ -51,7 +51,7 @@ ACCESSORS: {
 		default => sub {
 			my ( $self ) = @_;
 			return $self->dbh->prepare( "
-				select * from files as f 
+				select * from file as f 
 				join directory as d 
 					on f.directory_id = d.rowid 
 				join suffix as s 
@@ -71,7 +71,7 @@ sub get_file_id {
 
 	$path = $self->abs_path( $path );
 
-	#split, get ids for parts. it's worth mentioning not all files need a suffix
+	#split, get ids for parts. it's worth mentioning not all file need a suffix
 	my ( $file_name, $directory, $suffix ) = $self->file_parse( $path );
 
 	my $directory_id = $self->get_directory_id( $directory );
@@ -82,7 +82,7 @@ sub get_file_id {
 	my $file_id = $self->find_name_id( $directory_id, $file_name, $suffix_id );
 	unless ( $file_id ) {
 		$self->insert(
-			'files',
+			'file',
 			{
 				directory_id => $directory_id,
 				suffix_id    => $suffix_id,
@@ -90,7 +90,7 @@ sub get_file_id {
 			}
 		);
 		$file_id = $self->find_name_id( $directory_id, $file_name, $suffix_id );
-		confess( "Created row not found for [$file_name]" ) unless $file_id;
+		confess( "Created row not found for [$file_name] (?!)" ) unless $file_id;
 	}
 	return $file_id;
 
@@ -151,7 +151,7 @@ sub find_name_id {
 	$p ||= {};
 
 	my $row = $self->select(
-		'files',
+		'file',
 		[qw/* rowid/],
 		{
 			directory_id => $directory_id,
@@ -211,6 +211,16 @@ sub generate_store_subject_md5 {
 		);
 		return $md5_string;
 	}
+}
+
+sub set_file_id_extra {
+	my ( $self, $id, $href ) = @_;
+	my $update;
+	for ( qw/ ed2k sha1 size md5 / ) {
+		$update->{"`$_`"} = $href->{$_};
+	}
+	$self->update( 'file', $update, {rowid => $id} );
+
 }
 
 1;

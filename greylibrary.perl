@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-my $sqlite_path = "./db/path_db.sqlite";
+my $sqlite_path = '/home/m/git/GreyLibrary/db/path_db_template.sqlite';
 
 return {
 	name => 'GreyLibrary',

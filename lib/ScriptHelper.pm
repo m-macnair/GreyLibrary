@@ -1,7 +1,7 @@
 #ABSTRACT: Use DBI::Abstract and SQLite for arbitrary working databases
 package ScriptHelper;
-our $VERSION = 'v1.1.3';
-##~ DIGEST : c7f0dc224cd953e342f7b9ad624de796
+our $VERSION = 'v1.1.4';
+##~ DIGEST : a3d9ee99ae9bfdd979aaf70b047f3462
 use Try::Tiny;
 use Moo::Role;
 use Carp;
@@ -17,8 +17,7 @@ with qw/
 sub default_setup {
 	my ( $self, $path, $opt ) = @_;
 	$opt ||= {};
-	my $conf = $self->config_file( '/home/m/Hobby/Hobby-Code/GreyLibrary/greylibrary.perl' );
-
+	my $conf = $self->config_file( '/home/m/git/GreyLibrary/greylibrary.perl' );
 	$self->sqlite3_file_to_dbh( $conf->{sqlite_path} );
 
 }

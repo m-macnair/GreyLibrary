@@ -2,7 +2,7 @@
 # ABSTRACT:
 our $VERSION = 'v0.0.4';
 
-##~ DIGEST : 5466ef678dd3b82d17df2568257aad64
+##~ DIGEST : 3c6583e49ab39e26a39fcd6e61e0204a
 
 BEGIN {
 	push( @INC, "./lib/" );
@@ -25,30 +25,10 @@ use Data::Dumper;
 sub process {
 	my ( $self, $path ) = @_;
 	$self->default_setup();
-	if ( -f $path ) {
-		$self->process_file( $path );
-
-	} elsif ( -d $path ) {
-		$self->sub_on_find_files(
-			sub {
-				my ( $this_path ) = @_;
-				$self->process_file( $this_path );
-				return 1;
-			},
-			$path
-		);
-
-	}
+	die $self->{sqlite_path};
 
 }
 
-sub process_file {
-	my ( $self, $path ) = @_;
-	my $id     = $self->get_file_id( $path );
-	my $hashes = $self->get_hashes_for_file( $path );
-	$self->set_file_id_extra( $id, $hashes );
-
-}
 1;
 
 package main;
