@@ -1,0 +1,3 @@
+[submodule "foreign/Moo-GenericRole"]
+	path = foreign/Moo-GenericRole
+	url = https://github.com/m-macnair/Moo-GenericRole.git
