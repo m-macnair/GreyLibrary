@@ -26,7 +26,7 @@ ACCESSORS: {
 		is      => 'rw',
 		lazy    => 1,
 		default => sub {
-			return 'files';
+			return 'file';
 		}
 	);
 
@@ -34,7 +34,7 @@ ACCESSORS: {
 		is      => 'rw',
 		lazy    => 1,
 		default => sub {
-			return 'rowid';
+			return 'id';
 		}
 	);
 
