@@ -1,0 +1,2 @@
+colour individual host terminals 
+generic perllll script that does searches in foreign/, lib etc
