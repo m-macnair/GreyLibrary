@@ -7,7 +7,6 @@ with qw/
   Moo::GenericRole::DB
   Moo::GenericRole::DB::Abstract
   Moo::GenericRole::DB::SQLite
-  Moo::Task::FileDB::Role::DB::SQLite::Setup
   Moo::Task::FileDB::Role::DB::AbstractSQLite
   Moo::Task::SubjectTagDB::Role::DB::AbstractSQLite
   /;

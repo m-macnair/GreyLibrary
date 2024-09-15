@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 # ABSTRACT:
-our $VERSION = 'v0.0.5';
+our $VERSION = 'v0.0.6';
 
-##~ DIGEST : 06a9e23e7aad8e786c5c1d3c43c55981
+##~ DIGEST : 3c1e41bf448fa777accd13a423501db0
 
 use strict;
 use warnings;
@@ -26,9 +26,6 @@ sub _do_db {
 
 sub process {
 	my ( $self ) = @_;
-	use Data::Dumper;
-
-	# 	die Dumper($self->cfg());
 	$self->_do_db( $self->cfg() );
 	my $backlog_sth = $self->query(
 		q{
