@@ -37,3 +37,4 @@ inc/
 
 /db/
 etc/db/test_db.sqlite
+etc/local/
