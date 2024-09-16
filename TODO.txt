@@ -1,0 +1,13 @@
+Retrieve associated file for subject 
+	in Subject::Access
+		Associate file to subject
+		Determine file association type
+		determine associated file's type
+	in web view
+
+$self->Log();
+
+colour individual host terminals 
+generic perllll script that does searches in foreign/, lib etc
+
+Rework gallery display into separate js file
