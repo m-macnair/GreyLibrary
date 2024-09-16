@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 # ABSTRACT:
-our $VERSION = 'v0.0.6';
+our $VERSION = 'v0.0.7';
 
-##~ DIGEST : 3c1e41bf448fa777accd13a423501db0
+##~ DIGEST : 8187a286a28de00f63d3fb4c4fade9ae
 
 use strict;
 use warnings;
@@ -10,26 +10,31 @@ use warnings;
 package Obj;
 use Moo;
 use parent 'Moo::GenericRoleClass::CLI'; #provides  CLI, FileSystem, Common
-with qw/
-  GreyLibraryMoo::Role::Thumb
-  /;
+use GreyLibraryMoo::Class::SQLite;
 
-sub _do_db {
+sub setup {
 	my ( $self, $p ) = @_;
+	my $glm = GreyLibraryMoo::Class::SQLite->new( $p );
 	$p ||= {};
 	if ( $p->{db_file} ) {
-		$self->sqlite3_file_to_dbh( $p->{db_file} );
+		$glm->sqlite3_file_to_dbh( $p->{db_file} );
 	} else {
 		die "db_file not provided";
 	}
+	$self->{glm} = $glm;
 }
 
+#TODO: associate thumbnail with file
 sub process {
 	my ( $self ) = @_;
-	$self->_do_db( $self->cfg() );
-	my $backlog_sth = $self->query(
+
+	$self->setup( $self->cfg() );
+	my $glm         = $self->{glm};
+	my $backlog_sth = $glm->query(
 		q{
 		select f.* from file f 
+		inner join subject_files sf
+			on f.id = sf.file_id
 		left join preview_file pfo
 			on f.id = pfo.original_id
 		left join preview_file pfp
@@ -44,7 +49,7 @@ sub process {
 	);
 	while ( my $row = $backlog_sth->fetchrow_hashref() ) {
 		print "Working on file [$row->{id}]$/";
-		$self->get_thumbnail_path_for_file_id( $row->{id} );
+		$glm->get_thumbnail_path_for_file_id( $row->{id} );
 	}
 }
 1;
