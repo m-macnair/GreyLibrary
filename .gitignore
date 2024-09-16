@@ -40,3 +40,4 @@ inc/
 etc/db/test_db.sqlite
 etc/local/
 /test_data/
+etc/db/test_db.sqlite
