@@ -1,7 +1,7 @@
 # ABSTRACT : Combine ./foreign/ DB modules into one role for consistency
 package GreyLibraryMoo::Role::Combine::DB;
-our $VERSION = 'v0.0.11';
-##~ DIGEST : 31a98b17225268a1f19163045ddeac2a
+our $VERSION = 'v0.0.12';
+##~ DIGEST : 968e69005725edd96258eabce608c79c
 use Moo::Role;
 with qw/
   Moo::GenericRole::DB

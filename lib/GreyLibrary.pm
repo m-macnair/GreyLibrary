@@ -1,8 +1,8 @@
 package GreyLibrary;
 use strict;
 use warnings;
-our $VERSION = '0.04';
-##~ DIGEST : ffca55702b2ff7cf7d00582678d63d88
+our $VERSION = '0.05';
+##~ DIGEST : a7da5d2c02045bf1e5cdbc21b6b3169a
 use Moose;
 use namespace::autoclean;
 
@@ -29,7 +29,7 @@ __PACKAGE__->config(
 	encoding                                    => 'UTF-8', # Setup request decoding and response encoding
 );
 
-__PACKAGE__->config->{static}->{dirs} = [ 'static', ];
+__PACKAGE__->config->{static}->{dirs} = [ 'srv', 'static' ];
 
 __PACKAGE__->config(
 	'Plugin::Authentication' => {

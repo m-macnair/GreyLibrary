@@ -6,12 +6,11 @@ use Moo;
 use Carp;
 use Data::Dumper;
 
-our $VERSION = 'v1.0.7';
-##~ DIGEST : 4fdd4a4f97f7ea4556f99a65fbc21d02
+our $VERSION = 'v1.0.8';
+##~ DIGEST : 554830f08845770639454721851a51ac
 
 with qw/
-  Moo::ComplexRole::TagDB
-  Moo::ComplexRole::FileIDDB
+  GreyLibraryMoo::Role::Combine::DB
   /;
 
 sub dbh {

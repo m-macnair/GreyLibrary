@@ -21,7 +21,7 @@ sub index : default : FormConfig("login.perl") {
 		{
 			$c->session( user_id => $c->user->get( 'id' ) );
 			warn "login from user [" . $c->session->{user_id} . ']';
-			$c->res->redirect( $c->uri_for( "/image/web/untagged" ) );
+			$c->res->redirect( $c->uri_for( "/root/default" ) );
 		} else {
 			die "failed auth (!?)";
 		}

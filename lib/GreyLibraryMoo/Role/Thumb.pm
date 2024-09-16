@@ -6,8 +6,8 @@ use Moo::Role;
 use Carp;
 use Data::Dumper;
 use Try::Tiny;
-our $VERSION = 'v1.0.8';
-##~ DIGEST : 79e1e3fa27e3afe0de09aecbb6c347b5
+our $VERSION = 'v1.0.9';
+##~ DIGEST : debb2c318208c44fe82d7f7d1ab95dc4
 
 with qw/
   GreyLibraryMoo::Role::Combine::DB
@@ -15,6 +15,14 @@ with qw/
 
 use Image::Magick;
 
+ACCESSORS: {
+	has thumbnail_dir => (
+		is       => 'rw',
+		required => 1
+	);
+}
+
+#TODO: learn error handling
 sub generate_thumbnail {
 	my ( $self, $source_path, $target_path, $p ) = @_;
 	$p ||= {};
@@ -31,29 +39,36 @@ sub generate_thumbnail {
 
 	# Write the thumbnail image to the output file
 	$image->Write( $target_path );
+	die "failed to write thumbnail for [$source_path] to [$target_path], not written (!?) " unless -e $target_path;
 	return 1;
 }
 
 sub get_thumbnail_path_for_file_id {
-	my ( $self, $file_id ) = @_;
+	my ( $self, $file_id, $p ) = @_;
+	$p ||= {};
 
-	my $meta_row = $self->select( 'file_meta', {file_id => $file_id}, qw{*} )->fetchrow_hashref();
+	my $meta_row = $self->select( 'file_meta', qw{*}, {file_id => $file_id} )->fetchrow_hashref();
 	if ( $meta_row->{is_thumbnail} ) {
 		Carp::confess( "Attempted to get a thumbnail from an existing thumbnail" );
 	}
 
-	my $row = $self->select( 'preview_file', {original_id => $file_id}, qw[preview_id] )->fetchrow_hashref();
+	my $row = $self->select( 'preview_file', qw{*}, {original_id => $file_id} )->fetchrow_hashref();
+
 	if ( $row->{preview_id} ) {
+		my $r = $self->get_file_path_from_id( $row->{preview_id} );
 		if ( wantarray() ) {
-			return ( $row->{preview_id}, {existing => 1} );
+			return ( $r, {existing => 1} );
 		}
-		return $self->get_file_path_from_id( $row->{preview_id} );
+		return $r;
 	}
+
+	#don't generate if we only want existing
+	return undef if $p->{existing};
 
 	my $source_path = $self->get_file_path_from_id( $file_id );
 	Carp::confess( "Source path [$source_path] not found" ) unless -e $source_path;
-	my $target_path = $self->cfg()->{thumbnail_dir} . "/$file_id\_thumb.jpg";
-
+	my $target_path = $self->{thumbnail_dir} . "/$file_id\_thumb.jpg";
+	$target_path =~ s|//|/|g;
 	try {
 		$self->generate_thumbnail( $source_path, $target_path );
 	} catch {

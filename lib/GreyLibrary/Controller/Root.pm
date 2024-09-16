@@ -27,7 +27,8 @@ Standard 404 error page
 sub default : Path {
 	my ( $self, $c ) = @_;
 	$c->response->body( 'Page not found' );
-	$c->res->redirect( $c->uri_for( "/image/web/untagged" ) );
+
+	# 	$c->res->redirect( $c->uri_for( "/image/web/untagged" ) );
 }
 
 =head2 end
