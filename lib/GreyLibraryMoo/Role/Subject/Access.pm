@@ -6,22 +6,38 @@ use Moo::Role;
 use Carp;
 use Data::Dumper;
 use Try::Tiny;
-our $VERSION = 'v1.0.9';
-##~ DIGEST : 454920b5dc70e1ad31b04c7afeb8c336
+our $VERSION = 'v1.0.10';
+##~ DIGEST : 1dfb715bde3c11c43e7ef0934ec22cc1
 
 with qw/
   GreyLibraryMoo::Role::Combine::DB
   /;
 
-#TODO: - determine single thumbnail
+#TODO: - determine single thumbnail (?)
+#read_subject - get everything relevant about a single conceptual subject
 sub read_subject {
 	my ( $self, $id ) = @_;
 
 	#this is one case that a result set would have value I think
+	my $subject_row = $self->select( 'subject', qw/*/, {id => $id} )->fetchrow_hashref();
 
-	my $subject_row = $self->query( 'select * from subject where id = ?', $id )->fetchrow_hashref();
-	return {fail => 'subject not found'};
-	my $files_rs = $self->query( 'select * from subject_files where subject_id = ?', $id );
+	return {fail => "subject [$id] not found"} unless $subject_row;
+
+	my $subject_file_row = $self->select( 'subject_files', qw/*/, {subject_id => $id, file_type => 'primary'} )->fetchrow_hashref();
+	return {fail => "No files found for subject [$id] "} unless $subject_file_row;
+
+	my $thumb_file_path = $self->get_thumbnail_path_for_file_id( $subject_file_row->{file_id}, {existing => 0} );
+	return {fail => "Thumbnail file not found for subject [$id] file id [$subject_file_row->{file_id}] "} unless $thumb_file_path;
+
+	#TODO: tags
+	#TODO: groups
+	#TODO: ???
+
+	return {
+		pass            => 1,
+		subject_id      => $id,             # this will legitimately change one day e.g. when aliased
+		thumb_file_path => $thumb_file_path,
+	};
 
 }
 

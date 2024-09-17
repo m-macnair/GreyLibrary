@@ -1,21 +1,4 @@
-function want(id) {
-	send_tag_string('want',id);
-	post_tag(id);
-}
-function problem(id) {
-	send_tag_string('problem',id);
-	post_tag(id);
-}
 
-function keep(id) {
-	send_tag_string('keep',id);
-	post_tag(id);
-}
-
-function toss(id) {
-	send_tag_string('toss',id);
-	post_tag(id);
-}
 
 function post_tag(id){
 	del_div(id);

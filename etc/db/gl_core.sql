@@ -30,4 +30,11 @@ CREATE TABLE file_meta (
 );
 CREATE INDEX file_meta_file_id ON file_meta(file_id);
 
+/* This could probably be somewhere else */
+CREATE TABLE users (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	string TEXT NOT NULL
+);
+
+
 

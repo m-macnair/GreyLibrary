@@ -1,0 +1,41 @@
+[% PROCESS component/tag_buttons.tt %]
+
+<script type="text/javascript" src="/static/tag.js"></script>\
+<div class="fancy_full box" style="min-height:600px">
+	<div class="full box" style="max-height:600px">
+		<a id="page_link" href="[% img_url %]">
+			<img id="page_image" src="[% img_url %]" style="max-height:400px;width:auto;float:center;"/>
+		</a>
+	</div>
+	[% IF c.stash.fail %] 
+		<p>Subject record failure: [% c.stash.fail %]</p>
+	
+	[% ELSE %]
+		[% INCLUDE toss_button id = c.stash.subject_id %]
+		[% INCLUDE keep_button id = c.stash.subject_id %]
+		[% INCLUDE want_button id = c.stash.subject_id %]
+		[% INCLUDE problem_button id = c.stash.subject_id %]
+		[% INCLUDE lewd_button id = c.stash.subject_id %]
+
+		<div class="full box" >
+			<div class="third_wide" >
+				[% FOREACH tag IN c.stash.tags_left %]
+					[% INCLUDE common_button tag = tag id = c.stash.subject_id %]			
+				[% END %]
+			</div>
+			<div class="third_wide" >
+				[% FOREACH tag IN c.stash.tags_mid %]
+					[% INCLUDE common_button tag = tag id = c.stash.subject_id %]			
+				[% END %] 		
+			</div>
+			<div class="third_wide" >
+				[% FOREACH tag IN c.stash.tags_right %]
+					[% INCLUDE common_button tag = tag id = c.stash.subject_id %]			
+				[% END %]
+			</div>
+		</div>
+	[% END %]
+	
+</div>
+
+

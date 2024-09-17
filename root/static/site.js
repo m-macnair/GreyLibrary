@@ -8,10 +8,6 @@ function get_url(this_url){
 }
 
 
-function send_tag_string(tag_string,id) {
-	get_url("/image/api/tag_file/" + id + "/" + tag_string); 
-}
-
 async function async_get_url (this_url) {
 	const response = await fetch(this_url);
 	return response;

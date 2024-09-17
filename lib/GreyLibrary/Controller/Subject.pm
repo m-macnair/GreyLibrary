@@ -24,26 +24,24 @@ Catalyst Controller.
 
 sub index : Path : Args(1) {
 	my ( $self, $c, $subject_id ) = @_;
-	my $glm         = $c->model( 'GLM' );
-	my $subject_row = $glm->select( 'subject', qw/*/, {id => $subject_id} )->fetchrow_hashref();
-	die "subject not found" unless $subject_row;
-	my $subject_file_row = $glm->select( 'subject_files', qw/*/, {subject_id => $subject_id, file_type => 'primary'} )->fetchrow_hashref();
-	die "subject file found" unless $subject_file_row;
+	my $glm     = $c->model( 'GLM' );
+	my $subject = $glm->read_subject( $subject_id );
 
-	my $thumb_file_path = $glm->get_thumbnail_path_for_file_id( $subject_file_row->{file_id}, {existing => 1} );
-	warn "thumb file path: [$thumb_file_path]";
-	$thumb_file_path =~ s|./root/|/|;
+	if ( $subject->{fail} ) {
+		$c->stash( {%{$subject}} );
+
+	}
+
+	$subject->{thumb_file_path} =~ s|./root/|/|;
 
 	my ( $right, $mid, $left ) = $self->get_window_tags();
 	$c->stash(
 		{
-			template => 'image/web/standard_image_view.tt',
-			img_url  => $thumb_file_path,
-
+			subject_id => $subject->{subject_id},
+			img_url    => $subject->{thumb_file_path},
 			tags_right => $right,
 			tags_mid   => $mid,
 			tags_left  => $left,
-			tags       => [ @$right, @$mid, @$left ]
 		}
 	);
 }

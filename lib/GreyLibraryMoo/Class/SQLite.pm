@@ -1,13 +1,14 @@
 # ABSTRACT : Combine ./foreign/ DB modules into one role for consistency
 package GreyLibraryMoo::Class::SQLite;
-our $VERSION = 'v0.0.12';
-##~ DIGEST : 4341d9ad7da5f8019bff601bc3656e9e
+our $VERSION = 'v0.0.13';
+##~ DIGEST : a953eca68dc4c00ba4555fc24f2af1e8
 use Moo;
 
 #not sure Thumb should be here
 with qw/
   GreyLibraryMoo::Role::Combine::DB
   GreyLibraryMoo::Role::Subject::Access
+  GreyLibraryMoo::Role::Subject::Admin
   GreyLibraryMoo::Role::Thumb
   Moo::GenericRole::FileSystem
   /;
