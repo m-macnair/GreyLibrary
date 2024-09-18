@@ -6,8 +6,8 @@ use Moo::Role;
 use Carp;
 use Data::Dumper;
 use Try::Tiny;
-our $VERSION = 'v1.0.9';
-##~ DIGEST : debb2c318208c44fe82d7f7d1ab95dc4
+our $VERSION = 'v1.0.10';
+##~ DIGEST : 655fe5ff2f1ff5f5a9b352a9c3fcb415
 
 with qw/
   GreyLibraryMoo::Role::Combine::DB
@@ -32,7 +32,7 @@ sub generate_thumbnail {
 	$image->Read( $source_path );
 
 	# Scale down the image to create a thumbnail
-	$image->Scale( geometry => $p->{geometry} || '400x400' );
+	$image->Scale( geometry => $p->{geometry} || '800x800' );
 
 	# Set the thumbnail image quality
 	$image->Set( quality => $p->{quality} || 50 );

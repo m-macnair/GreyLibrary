@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 # ABSTRACT:
-our $VERSION = 'v0.0.7';
+our $VERSION = 'v0.0.8';
 
-##~ DIGEST : 8187a286a28de00f63d3fb4c4fade9ae
+##~ DIGEST : d8bfff96ad8f2fa425f54652eea0fdc8
 
 use strict;
 use warnings;
@@ -11,6 +11,7 @@ package Obj;
 use Moo;
 use parent 'Moo::GenericRoleClass::CLI'; #provides  CLI, FileSystem, Common
 use GreyLibraryMoo::Class::SQLite;
+use Try::Tiny;
 
 sub setup {
 	my ( $self, $p ) = @_;
@@ -41,15 +42,23 @@ sub process {
 			on f.id = pfp.preview_id
 		join file_type ft
 			on f.file_type_id = ft.id 
+		left join file_meta fm
+			on fm.file_id = f.id
 		where 
 			pfp.preview_id is null
 			and pfo.id is null
 			and ft.class = "Image"
+			and fm.no_preview is null
 	}
 	);
 	while ( my $row = $backlog_sth->fetchrow_hashref() ) {
 		print "Working on file [$row->{id}]$/";
-		$glm->get_thumbnail_path_for_file_id( $row->{id} );
+		try {
+			$glm->get_thumbnail_path_for_file_id( $row->{id} );
+		} catch {
+			print "Unhandled failure in thumbnail generation - marking $row->{id} for no preview$/";
+			$glm->insert( 'file_meta', {file_id => $row->{id}, no_preview => 1} );
+		}
 	}
 }
 1;
