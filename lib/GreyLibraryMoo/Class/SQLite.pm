@@ -1,7 +1,7 @@
 # ABSTRACT : Combine ./foreign/ DB modules into one role for consistency
 package GreyLibraryMoo::Class::SQLite;
-our $VERSION = 'v0.0.13';
-##~ DIGEST : a953eca68dc4c00ba4555fc24f2af1e8
+our $VERSION = 'v0.0.14';
+##~ DIGEST : 2ef6bd093ad49aa7a297cacddcce118d
 use Moo;
 
 #not sure Thumb should be here
@@ -11,6 +11,7 @@ with qw/
   GreyLibraryMoo::Role::Subject::Admin
   GreyLibraryMoo::Role::Thumb
   Moo::GenericRole::FileSystem
+  GreyLibraryMoo::Role::CatalystPaths
   /;
 
 sub BUILD {

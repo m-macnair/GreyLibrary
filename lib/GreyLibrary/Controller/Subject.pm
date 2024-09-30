@@ -32,9 +32,9 @@ sub index : Path : Args(1) {
 
 	}
 
-	$subject->{thumb_file_path} =~ s|./root/|/|;
+	my $thumb_path = $glm->filter_thumb_path( $subject->{thumb_file_path} );
 
-	my ( $right, $mid, $left ) = $self->get_window_tags();
+	my ( $right, $mid, $left ) = $self->get_extended_tags();
 	$c->stash(
 		{
 			subject_id => $subject->{subject_id},
@@ -46,7 +46,7 @@ sub index : Path : Args(1) {
 	);
 }
 
-sub get_window_tags : Private {
+sub get_extended_tags : Private {
 	my ( $self, $c ) = @_;
 
 	my $right = [ "40k",        "SM",      "IG", "Imperial", "Bases" ];

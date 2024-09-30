@@ -1,0 +1,13 @@
+<div id="cell">
+<div id="cell_[% subject_id %]">
+	<h3>[% subject_id %]</h3>
+	
+	<div>
+	<a href="">
+		<img src="[% thumb_file_path %]" style="height:300px;width:300px;float:left;"> </img>
+	</a>
+	
+	</div>
+	
+</div>
+</div>

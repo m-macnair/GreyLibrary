@@ -10,13 +10,13 @@ BEGIN { extends 'Catalyst::Controller' }
 #
 __PACKAGE__->config( namespace => '' );
 
-sub auto : Private {
-	my ( $self, $c ) = @_;
-
-	unless ( $c->session->{user_id} || index( $c->request->uri, '/auth/web' ) > 0 ) {
-		$c->res->redirect( $c->uri_for( "/auth/web/" ) );
-	}
-}
+# sub auto : Private {
+# 	my ( $self, $c ) = @_;
+#
+# 	unless ( $c->session->{user_id} || index( $c->request->uri, '/auth/web' ) > 0 ) {
+# 		$c->res->redirect( $c->uri_for( "/search/40k" ) );
+# 	}
+# }
 
 =head2 default
 

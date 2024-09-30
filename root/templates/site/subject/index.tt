@@ -1,10 +1,10 @@
 [% PROCESS component/tag_buttons.tt %]
 
-<script type="text/javascript" src="/static/tag.js"></script>\
-<div class="fancy_full box" style="min-height:600px">
-	<div class="full box" style="max-height:600px">
+<script type="text/javascript" src="/static/tag.js"></script>
+<div class="fancy_full box" style="min-height:1000px">
+	<div class="full box" style="max-height:1000px">
 		<a id="page_link" href="[% img_url %]">
-			<img id="page_image" src="[% img_url %]" style="max-height:400px;width:auto;float:center;"/>
+			<img id="page_image" src="[% img_url %]" style="max-height:900px;width:auto;float:center;"/>
 		</a>
 	</div>
 	[% IF c.stash.fail %] 

@@ -122,29 +122,6 @@ sub untagged_gallery : Local {
 	$c->res->redirect( $c->uri_for( "/image/web/gallery" ) );
 }
 
-sub search_gallery : Local : CaptureArgs(1) {
-	my ( $self, $c, $page ) = @_;
-	$page ||= 1;
-	my $results = 20;
-	my $m       = $c->model( 'SQLiteDB' );
-	warn "searching for " . $c->session->{search_string};
-	my $stack = $m->search_string( $c->session->{search_string}, $results, $page );
-
-	my @other_stack;
-	for my $row ( @{$stack} ) {
-		push( @other_stack, $row->[0] );
-	}
-	warn Dumper( [ $stack, \@other_stack ] );
-	$c->stash(
-		{
-			gallery_ids   => \@other_stack,
-			search_page   => $page,
-			get_thumb_url => $c->uri_for( qw/ get_thumb_id/ ) . '/',
-		}
-	);
-
-}
-
 sub untagged : Local {
 	my ( $self, $c, $skip ) = @_;
 	my $stack = $c->forward( qw/GreyLibrary::Controller::Image get_untagged/, [$skip] );
