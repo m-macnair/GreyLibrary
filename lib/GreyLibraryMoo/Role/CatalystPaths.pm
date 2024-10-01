@@ -11,7 +11,9 @@ our $VERSION = 'v1.0.11';
 sub filter_thumb_path {
 	my ( $self, $path ) = @_;
 
-	$path =~ s|./root/|/|;
+	$path =~ s|./root/||;
+	$path =~ s|/root/||;
+	
 	return $path;
 
 }

@@ -31,14 +31,15 @@ sub index : Path : Args(1) {
 		$c->stash( {%{$subject}} );
 
 	}
-
+	
 	my $thumb_path = $glm->filter_thumb_path( $subject->{thumb_file_path} );
-
+	
 	my ( $right, $mid, $left ) = $self->get_extended_tags();
 	$c->stash(
 		{
 			subject_id => $subject->{subject_id},
-			img_url    => $subject->{thumb_file_path},
+			subject_data => $subject,
+			img_url    => $thumb_path,
 			tags_right => $right,
 			tags_mid   => $mid,
 			tags_left  => $left,

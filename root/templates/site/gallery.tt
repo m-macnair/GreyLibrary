@@ -14,10 +14,9 @@
 		[% END %]
 	</div>
 	<div>
-		[% IF c.stash.search_page > 1  %]
-			<a href="/search/[%c.stash.search_page - 1 %]">Previous</a>
+		[% IF c.stash.next_string   %]
+			<a href="[%c.stash.next_string %]">Next</a>
 		[% END %]
-		<a href="/search/[%c.stash.search_page + 1 %]">Next</a>
 	</div>
 </div>
 

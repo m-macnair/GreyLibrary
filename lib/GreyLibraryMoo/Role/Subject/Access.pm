@@ -37,6 +37,7 @@ sub read_subject {
 		pass            => 1,
 		subject_id      => $id,             # this will legitimately change one day e.g. when aliased
 		thumb_file_path => $thumb_file_path,
+		string => $subject_row->{string},
 	};
 
 }
