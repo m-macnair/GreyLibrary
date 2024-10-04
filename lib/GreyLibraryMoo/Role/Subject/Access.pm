@@ -6,8 +6,8 @@ use Moo::Role;
 use Carp;
 use Data::Dumper;
 use Try::Tiny;
-our $VERSION = 'v1.0.10';
-##~ DIGEST : 1dfb715bde3c11c43e7ef0934ec22cc1
+our $VERSION = 'v1.0.11';
+##~ DIGEST : f0ea1c01e9bcb5d9c023c0e37fbe31d7
 
 with qw/
   GreyLibraryMoo::Role::Combine::DB
@@ -35,9 +35,9 @@ sub read_subject {
 
 	return {
 		pass            => 1,
-		subject_id      => $id,             # this will legitimately change one day e.g. when aliased
+		subject_id      => $id,                   # this will legitimately change one day e.g. when aliased
 		thumb_file_path => $thumb_file_path,
-		string => $subject_row->{string},
+		string          => $subject_row->{string},
 	};
 
 }

@@ -20,16 +20,15 @@ Catalyst Controller.
 
 =cut
 
-
 #this catches everything on the controller and I MUST learn why
 sub string : Path : Args(2) {
-	my ( $self, $c, $string,$page  ) = @_;
+	my ( $self, $c, $string, $page ) = @_;
 
 	$page ||= 1;
 	my $results = 20;
 	warn "searching for " . $string;
-	my $glm     = $c->model( 'GLM' );
-	
+	my $glm = $c->model( 'GLM' );
+
 	my $subject_stack = $glm->search_tag_string( $string, $results, $page );
 
 	my @result_stack;
@@ -44,11 +43,11 @@ sub string : Path : Args(2) {
 		);
 	}
 
-	my $next_string = "/search/$string/" . ($page +1);
+	my $next_string = "/search/$string/" . ( $page + 1 );
 	warn "next string: $next_string";
 	$c->stash(
 		{
-			next_string => $next_string,
+			next_string   => $next_string,
 			search_string => $string,
 			search_page   => $page,
 			gallery_data  => \@result_stack,
