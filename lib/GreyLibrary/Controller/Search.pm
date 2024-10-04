@@ -24,12 +24,19 @@ Catalyst Controller.
 sub string : Path : Args(2) {
 	my ( $self, $c, $string, $page ) = @_;
 
-	$page ||= 1;
-	my $results = 20;
-	warn "searching for " . $string;
-	my $glm = $c->model( 'GLM' );
+	$page ||= 0;
 
-	my $subject_stack = $glm->search_tag_string( $string, $results, $page );
+	# 	warn "searching for " . $string;
+	my $glm       = $c->model( 'GLM' );
+	my $tag_stack = $glm->tag_string_to_id_aref( lc( $string ) );
+	use Data::Dumper;
+	warn Dumper( $tag_stack );
+	my $subject_stack = $glm->intersect_search_arref_subject_ids(
+		$tag_stack,
+		{
+			page => $page
+		}
+	);
 
 	my @result_stack;
 
@@ -54,6 +61,16 @@ sub string : Path : Args(2) {
 			template      => 'gallery.tt',
 		}
 	);
+
+}
+
+sub form : Path : args(0) {
+	my ( $self, $c ) = @_;
+	if ( $c->request->method eq 'POST' ) {
+		if ( $c->request->params->{search_string} ) {
+			$c->detach( qw/string/, [ $c->request->param( 'search_string' ), 1 ] );
+		}
+	}
 
 }
 
