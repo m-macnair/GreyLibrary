@@ -68,7 +68,7 @@ sub form : Path : args(0) {
 	my ( $self, $c ) = @_;
 	if ( $c->request->method eq 'POST' ) {
 		if ( $c->request->params->{search_string} ) {
-			$c->detach( qw/string/, [ $c->request->param( 'search_string' ), 1 ] );
+			$c->res->redirect( $c->uri_for( "/search", $c->request->param( 'search_string' ), 1 ) );
 		}
 	}
 
