@@ -13,7 +13,7 @@ sub filter_thumb_path {
 
 	$path =~ s|./root/||;
 	$path =~ s|/root/||;
-	$path = "http://212.227.199.157:3000/$path";
+# 	$path = "http://212.227.199.157:3000/$path";
 
 	# 	$path ="/$path";
 	return $path;
