@@ -1,0 +1,20 @@
+[% BLOCK common_button %] 
+	<button class="tag_button" id="[% tag %]_button" onclick="tag_button( '[% tag %]',[% subject_id %])" >[% tag %]</button>
+[% END %]
+
+[%# The only thing distinct here is the colouring :/ %]
+[% BLOCK toss_button %] 
+	<button class="tag_button" id="toss_button" style="background-color:#ff2a2aff;" onclick="toss([% subject_id %])" >Toss</button>
+[% END %]
+[% BLOCK keep_button %] 
+<button class="tag_button"  id="keep_button"style="background-color:#2aff80ff;" onclick="keep([% subject_id %])" >Keep</button>
+[% END %]
+[% BLOCK want_button %] 
+<button class="tag_button"  id="want_button"style="background-color:#2a7fffff;" onclick="want([% subject_id %])" >Want</button>
+[% END %]
+[% BLOCK problem_button %] 
+<button class="tag_button"  id="problem_button"style="background-color:black; color:white;" onclick="problem([% subject_id %])" >Problem</button>
+[% END %]
+[% BLOCK lewd_button %] 
+<button class="tag_button"  id="lewd_button"style="background-color:cyan;" onclick="lewd([% subject_id %])" >Lewd</button>
+[% END %]

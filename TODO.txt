@@ -1,0 +1,10 @@
+GALLERY
+
+
+$self->Log();
+
+colour individual host terminals
+generic perllll script that does searches in foreign/, lib etc (???)
+
+Rework gallery display into separate js file - done for single subject page 
+*Role::DB - prepare_cached as standard is probably a mistake and at least the warning should be supressed 

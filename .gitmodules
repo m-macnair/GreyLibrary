@@ -1,0 +1,12 @@
+[submodule "foreign/Moo-Task-FileDB"]
+	path = foreign/Moo-Task-FileDB
+	url = https://github.com/m-macnair/Moo-Task-FileDB
+[submodule "foreign/Moo-GenericRole"]
+	path = foreign/Moo-GenericRole
+	url = https://github.com/m-macnair/Moo-GenericRole/
+[submodule "foreign/Moo-Task-SubjectTagDB"]
+	path = foreign/Moo-Task-SubjectTagDB
+	url = https://github.com/m-macnair/Moo-Task-SubjectTagDB.git
+[submodule "foreign/Mojo-Discord"]
+	path = foreign/Mojo-Discord
+	url = https://github.com/vsTerminus/Mojo-Discord.git

@@ -33,3 +33,11 @@ inc/
 /MANIFEST.bak
 /pm_to_blib
 /*.zip
+/root/srv/
+*~
+*.bak
+/db/
+etc/db/test_db.sqlite
+etc/local/
+/test_data/
+etc/db/test_db.sqlite

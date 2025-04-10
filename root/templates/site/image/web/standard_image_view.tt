@@ -79,33 +79,36 @@
 
 	</script>
 	
+	[% IF c.stash.fail %] 
+		<p>Subject record failure: [% c.stash.fail %]</p>
 	
-	<div class="full box" style="min-height:200px;">
-		<button class="tag_button" style="background-color:#ff2a2aff;" onclick="toss()" >Toss</button>
-		<button class="tag_button" style="background-color:#2aff80ff;" onclick="keep()" >Keep</button>
-		<button class="tag_button" style="background-color:#2a7fffff;" onclick="want()" >Want</button>
-		<button class="tag_button" style="background-color:black; color:white;" onclick="problem()" >Problem</button>
-	</div>
-	
+	[% ELSE %]
+		<div class="full box" style="min-height:200px;">
+			<button class="tag_button" style="background-color:#ff2a2aff;" onclick="toss()" >Toss</button>
+			<button class="tag_button" style="background-color:#2aff80ff;" onclick="keep()" >Keep</button>
+			<button class="tag_button" style="background-color:#2a7fffff;" onclick="want()" >Want</button>
+			<button class="tag_button" style="background-color:black; color:white;" onclick="problem()" >Problem</button>
+		</div>
+		
 
-	
-	<div class="full box" >
-		<div class="third_wide" >
-			[% FOREACH tag IN c.stash.tags_left %]
-				<button class="tag_button" id="[% tag %]_button" onclick="tag_button( '[% tag %]')" >[% tag %]</button>
-			[% END %]
+		
+		<div class="full box" >
+			<div class="third_wide" >
+				[% FOREACH tag IN c.stash.tags_left %]
+					<button class="tag_button" id="[% tag %]_button" onclick="tag_button( '[% tag %]')" >[% tag %]</button>
+				[% END %]
+			</div>
+			<div class="third_wide" >
+				[% FOREACH tag IN c.stash.tags_mid %]
+					<button class="tag_button" id="[% tag %]_button" onclick="tag_button( '[% tag %]')" >[% tag %]</button>
+				[% END %] 		
+			</div>
+			<div class="third_wide" >
+				[% FOREACH tag IN c.stash.tags_right %]
+					<button class="tag_button" id="[% tag %]_button" onclick="tag_button( '[% tag %]')" >[% tag %]</button>
+				[% END %]
+			</div>
 		</div>
-		<div class="third_wide" >
-			[% FOREACH tag IN c.stash.tags_mid %]
-				<button class="tag_button" id="[% tag %]_button" onclick="tag_button( '[% tag %]')" >[% tag %]</button>
-			[% END %] 		
-		</div>
-		<div class="third_wide" >
-			[% FOREACH tag IN c.stash.tags_right %]
-				<button class="tag_button" id="[% tag %]_button" onclick="tag_button( '[% tag %]')" >[% tag %]</button>
-			[% END %]
-		</div>
-	</div>
-	
+	[% END %]
 	
 </div>

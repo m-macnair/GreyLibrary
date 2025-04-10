@@ -10,13 +10,13 @@ BEGIN { extends 'Catalyst::Controller' }
 #
 __PACKAGE__->config( namespace => '' );
 
-sub auto : Private {
-	my ( $self, $c ) = @_;
-
-	unless ( $c->session->{user_id} || index( $c->request->uri, '/auth/web' ) > 0 ) {
-		$c->res->redirect( $c->uri_for( "/auth/web/" ) );
-	}
-}
+# sub auto : Private {
+# 	my ( $self, $c ) = @_;
+#
+# 	unless ( $c->session->{user_id} || index( $c->request->uri, '/auth/web' ) > 0 ) {
+# 		$c->res->redirect( $c->uri_for( "/search/40k" ) );
+# 	}
+# }
 
 =head2 default
 
@@ -27,7 +27,8 @@ Standard 404 error page
 sub default : Path {
 	my ( $self, $c ) = @_;
 	$c->response->body( 'Page not found' );
-	$c->res->redirect( $c->uri_for( "/image/web/untagged" ) );
+
+	# 	$c->res->redirect( $c->uri_for( "/image/web/untagged" ) );
 }
 
 =head2 end
