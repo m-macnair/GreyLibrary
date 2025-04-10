@@ -2,25 +2,28 @@
 use strict;
 use warnings;
 use Config::Any::Merge;
-our $VERSION = 'v0.0.2';
+our $VERSION = 'v0.0.3';
 
-##~ DIGEST : 2c8b57bc0a4aa8e50c980e29da92fb1e
+##~ DIGEST : f78b4e9249bfbbb3837fcdd58e7edded
 
+#Host specific configuration
 my $ec = {};
 if ( -e './etc/local/site_config.perl' ) {
 	$ec = Config::Any::Merge->load_files( {files => ['./etc/local/site_config.perl'], use_ext => 1} );
 }
 
-my $sqlite_path = "./db/working_db.sqlite";
-
 return {
 	name                      => 'GreyLibrary',
 	'GreyLibrary::Model::GLM' => {
-		db_file       => $sqlite_path,
+		host => 'localhost',
+		driver => 'mysql',
+		port => '3306',
+		db => 'gl2',
+		user => 'gl2',
+		pass => 'gl2',
 		thumbnail_dir => './root/srv/thumb/',
 	},
-	sqlite_path   => $sqlite_path,
 	thumbnail_dir => './root/srv/thumb/',
-	db_file       => $sqlite_path,
+
 	%{$ec},
 };
