@@ -11,6 +11,7 @@ with qw/
 
   Moo::Task::SubjectTagDB::Role::Core
   Moo::Task::SubjectTagDB::Role::DB
+  Moo::Task::SubjectTagDB::Role::DB::MariaDB
   Moo::Task::SubjectTagDB::Role::CacheWrappers::FastMmap
   /;
 
