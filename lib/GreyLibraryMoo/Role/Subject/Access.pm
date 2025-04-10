@@ -6,12 +6,8 @@ use Moo::Role;
 use Carp;
 use Data::Dumper;
 use Try::Tiny;
-our $VERSION = 'v1.0.11';
-##~ DIGEST : f0ea1c01e9bcb5d9c023c0e37fbe31d7
-
-with qw/
-  GreyLibraryMoo::Role::Combine::DB
-  /;
+our $VERSION = 'v1.0.12';
+##~ DIGEST : c98561c973ab1779b42b1f42a5fe9b22
 
 #TODO: - determine single thumbnail (?)
 #read_subject - get everything relevant about a single conceptual subject

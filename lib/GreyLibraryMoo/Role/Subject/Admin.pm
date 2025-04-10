@@ -6,12 +6,8 @@ use Moo::Role;
 use Carp;
 use Data::Dumper;
 use Try::Tiny;
-our $VERSION = 'v1.0.10';
-##~ DIGEST : 4b93d34a07da5a52f66caf1632762cc5
-
-with qw/
-  GreyLibraryMoo::Role::Combine::DB
-  /;
+our $VERSION = 'v1.0.11';
+##~ DIGEST : 03e969822edb36f0c687d5a2781c928a
 
 sub tag_subject_id {
 	my ( $self, $tag, $subject, $p ) = @_;
