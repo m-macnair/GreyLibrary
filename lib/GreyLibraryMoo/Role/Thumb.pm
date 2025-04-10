@@ -6,12 +6,8 @@ use Moo::Role;
 use Carp;
 use Data::Dumper;
 use Try::Tiny;
-our $VERSION = 'v1.0.11';
-##~ DIGEST : 76e04ed87ca2d47c0ed242e605d97bb8
-
-with qw/
-  GreyLibraryMoo::Role::Combine::DB::MariaDB
-  /;
+our $VERSION = 'v1.0.12';
+##~ DIGEST : 7fb40fc04d0b4f0c8e65ab8db4d7401f
 
 use Image::Magick;
 
