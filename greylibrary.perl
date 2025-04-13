@@ -8,9 +8,17 @@ our $VERSION = 'v0.0.4';
 
 #Host specific configuration
 my $ec = {};
-if ( -e './etc/local/site_config.perl' ) {
-	$ec = Config::Any::Merge->load_files( {files => ['./etc/local/site_config.perl'], use_ext => 1} );
+
+for my $file (qw/host_config.perl site_config.perl/){
+	my $path = "./etc/local/$file";
+	if ( -e  $path ) {
+		my $this_config = Config::Any::Merge->load_files( {files => [$path ], use_ext => 1} );
+		$ec = { %{$ec}, %{$this_config} };
+	}
 }
+
+
+my $thumbnail_dir = $ec->{thumbnail_dir}  || './root/srv/thumb/' ;
 
 return {
 	name                      => 'GreyLibrary',
@@ -21,10 +29,24 @@ return {
 		db                   => 'gl2',
 		user                 => 'gl2',
 		pass                 => 'gl2',
-		thumbnail_dir        => './root/srv/thumb/',
+		%{$ec->{db} || {}},
+		
+		thumbnail_dir        => $thumbnail_dir,
 		mysql_auto_reconnect => 1,
 	},
-	thumbnail_dir => './root/srv/thumb/',
+	'Plugin::Authentication' => {
+			realms        => {
+				discord => {
+					credential => {
+					client_id => '',
+					client_secret => 
+					
+					}
+					}
+					}
+	}
+	
+	thumbnail_dir => $thumbnail_dir,
 
 	%{$ec},
 };

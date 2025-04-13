@@ -1,0 +1,5 @@
+[% WRAPPER site_wrapper.tt %]
+Welcome to The Grey Library [% c.user.discord_data.global_name %], your user id is [% c.user.gl_data.id %]
+
+
+[% END %]

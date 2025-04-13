@@ -1,8 +1,8 @@
 package GreyLibrary;
 use strict;
 use warnings;
-our $VERSION = '0.05';
-##~ DIGEST : a7da5d2c02045bf1e5cdbc21b6b3169a
+our $VERSION = '0.07';
+##~ DIGEST : f87836d051255bc78a055c84521e3662
 use Moose;
 use namespace::autoclean;
 
@@ -25,7 +25,7 @@ __PACKAGE__->config(
 
 	# Disable deprecated behavior needed by old applications
 	disable_component_resolution_regex_fallback => 1,
-	enable_catalyst_header                      => 1,       # Send X-Catalyst header
+	enable_catalyst_header                      => 0,       # Send X-Catalyst header
 	encoding                                    => 'UTF-8', # Setup request decoding and response encoding
 );
 
@@ -33,22 +33,35 @@ __PACKAGE__->config->{static}->{dirs} = [ 'srv', 'static' ];
 
 __PACKAGE__->config(
 	'Plugin::Authentication' => {
-		default => {
-			credential => {
-				class          => 'Password',
-				password_field => 'password',
-				password_type  => 'clear'
+		default_realm => 'discord',
+		realms        => {
+			discord => {
+				credential => {
+					class => 'OAuth2',
+
+					grant_uri    => 'https://discord.com/api/oauth2/grant',
+					token_uri    => 'https://discord.com/api/oauth2/token',
+					userinfo_uri => 'https://discord.com/api/users/@me',
+
+					token_uri_method => 'POST',
+
+					#should be defined in the site_config.perl file
+					client_id     => '',
+					client_secret => '',
+					scope         => 'identify',
+
+
+				},
+				store => {
+					class => 'Null',
+				},
 			},
-			store => {
-				class => 'Minimal',
-				users => {
-					'm' => {
-						id       => 1,
-						password => "test",
-					},
-				}
-			}
-		}
+		},
+	},
+	'Plugin::Session' => {
+		flash_to_stash => 1,
+		expires        => 3600,
+		storage        => '/tmp/session',
 	}
 );
 
