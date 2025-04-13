@@ -1,7 +1,7 @@
 package GreyLibrary::Controller::Auth;
-our $VERSION = 'v0.0.3';
+our $VERSION = 'v1.0.1';
 
-##~ DIGEST : cf068e6375ad7e2b1854513ab0991c19
+##~ DIGEST : b288a0d8d132bae5198aab7f3723aa9c
 
 use Moose;
 use namespace::autoclean;
@@ -13,6 +13,7 @@ use JSON qw//;
 
 sub discord : Path('/auth/discord/') : Args(0) {
 	my ( $self, $c ) = @_;
+	$c->user( {} ) unless $c->user();
 
 	# Get the code from the URL
 	my $code  = $c->req->param( 'code' );
@@ -33,8 +34,15 @@ sub discord : Path('/auth/discord/') : Args(0) {
 	}
 
 	#TODO timeouts
-	my $token = $c->user->{discord_meta}->{token};
 
+	my $token;
+	if ( $c->user() && defined( $c->user->{discord_meta}->{token} ) ) {
+		$token = $c->user->{discord_meta}->{token};
+	}
+
+	#TODO make this work properly
+	my $discord_obj = $c->get_auth_realm( 'discord' );
+	$discord_obj->{credential}->ua->default_headers->header( 'User-Agent' => 'GreyLibrary (0.1,http://localhost:3000)' );
 	unless ( $token ) {
 		if ( $c->config->{force_token} ) {
 			$token = $c->config->{force_token};
@@ -53,13 +61,13 @@ sub discord : Path('/auth/discord/') : Args(0) {
 			$token = $token_response->token();
 		}
 	}
-	if ( $c->user->{discord_data} ) {
+	if ( $c->user() && $c->user->{discord_data} ) {
 
 	} else {
 		if ( $token ) {
-			my $discord_obj = $c->get_auth_realm( 'discord' );
-			my $url         = $discord_obj->{config}->{credential}->{userinfo_uri};
-			$discord_obj->{credential}->ua->ua->default_headers->header( 'User-Agent' => 'GreyLibrary (0.1,http://localhost:3000)' );
+
+			my $url = $discord_obj->{config}->{credential}->{userinfo_uri};
+
 			my $req = HTTP::Request->new( GET => $url );
 			$req->header( 'Authorization' => "Bearer $token" );
 			my $res = $discord_obj->{credential}->ua->request( $req );
@@ -70,11 +78,12 @@ sub discord : Path('/auth/discord/') : Args(0) {
 					$sth->execute();
 					if ( my $row = $sth->fetchrow_hashref() ) {
 						if ( $row->{user_id} ) {
-							$c->user->{gl_data}->{id} = $row->{user_id};
+
+							$c->user()->{gl_data}->{id} = $row->{user_id};
 						} else {
 							my $user_row = $c->model( 'GLM' )->select_insert_href( 'users', {display => $discord_data->{global_name}} );
 							$c->model( 'GLM' )->update( 'user_to_discord', {user_id => $user_row->{id}}, {discord_name => $discord_data->{username}} );
-							$c->user->{gl_data}->{id} = $user_row->{id};
+							$c->user()->{gl_data}->{id} = $user_row->{id};
 							warn "new user $discord_data->{username}";
 						}
 					}
@@ -106,3 +115,4 @@ sub logout : Path('/logout') : Args(0) {
 
 __PACKAGE__->meta->make_immutable;
 1;
+z
