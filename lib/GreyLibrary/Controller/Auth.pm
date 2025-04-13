@@ -1,7 +1,7 @@
 package GreyLibrary::Controller::Auth;
-our $VERSION = 'v1.0.1';
+our $VERSION = 'v1.0.2';
 
-##~ DIGEST : b288a0d8d132bae5198aab7f3723aa9c
+##~ DIGEST : 67da4ed55e3fabc15ba2e081d18b1b23
 
 use Moose;
 use namespace::autoclean;
@@ -115,4 +115,3 @@ sub logout : Path('/logout') : Args(0) {
 
 __PACKAGE__->meta->make_immutable;
 1;
-z
