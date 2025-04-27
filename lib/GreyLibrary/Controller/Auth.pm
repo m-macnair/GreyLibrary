@@ -1,7 +1,7 @@
 package GreyLibrary::Controller::Auth;
-our $VERSION = 'v1.0.3';
+our $VERSION = 'v1.0.4';
 
-##~ DIGEST : d56a7f7eff03593144bc4386dd0aece3
+##~ DIGEST : f8d3e858b2e12a10ef1e264ab01234fb
 
 use Moose;
 use namespace::autoclean;
@@ -94,7 +94,7 @@ sub discord : Path('/auth/discord/') : Args(0) {
 				}
 				$c->user->{discord_data} = $discord_data;
 				$c->log->debug( "***Succesful discord authentication for $discord_data->{global_name}" );
-				$c->response->redirect( '/search' );
+				$c->res->redirect( '/subject/collection' );
 				$c->detach();
 			} else {
 				$c->log->debug( '***Unhandled response from discord' . Dumper( $res ) );

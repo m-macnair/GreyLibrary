@@ -29,8 +29,9 @@ sub string : Path : Args(2) {
 	# 	warn "searching for " . $string;
 	my $glm       = $c->model( 'GLM' );
 	my $tag_stack = $glm->tag_string_to_id_aref( lc( $string ) );
-	use Data::Dumper;
-	warn Dumper( $tag_stack );
+
+	# 	use Data::Dumper;
+	# 	warn Dumper( $tag_stack );
 	my $subject_stack = $glm->intersect_search_arref_subject_ids(
 		$tag_stack,
 		{

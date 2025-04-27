@@ -6,8 +6,8 @@ use Moo::Role;
 use Carp;
 use Data::Dumper;
 use Try::Tiny;
-our $VERSION = 'v1.0.12';
-##~ DIGEST : 7fb40fc04d0b4f0c8e65ab8db4d7401f
+our $VERSION = 'v1.0.13';
+##~ DIGEST : c5e774e3629ad0a71c4a4dd1304c8487
 
 use Image::Magick;
 
@@ -62,7 +62,10 @@ sub get_thumbnail_path_for_file_id {
 	return undef if $p->{existing};
 
 	my $source_path = $self->get_file_path_from_id( $file_id );
-	Carp::confess( "Source path [$source_path] not found" ) unless -e $source_path;
+	unless ( -e $source_path ) {
+		Carp::cluck( "Source path [$source_path] not found" );
+		return '';
+	}
 	my $target_path = $self->{thumbnail_dir} . "/$file_id\_thumb.jpg";
 	$target_path =~ s|//|/|g;
 	try {
