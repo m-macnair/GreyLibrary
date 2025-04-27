@@ -20,13 +20,45 @@ Catalyst Controller.
 
 =cut
 
+sub auto : Private {
+	my ( $self, $c ) = @_;
+
+	#$c->stash->{disable_view} = 1;
+
+	#there's no explicit "do not render view" apparently, but if content is already set it will be left alone
+	$c->response->body( '' );
+	return 1;
+}
+
 sub tag_subject : Local : Args(2) {
 	my ( $self, $c, $id, $tag ) = @_;
 
-	if ( $c->session->{user_id} ) {
-		my $res = $c->model( 'GLM' )->single_tag_subject_as_user( $tag, $id, $c->session->{user_id} );
-		$c->response->body( 'tagged by user [' . $c->session->{user_id} . ']' );
+	if ( $c->user->{gl_data}->{id} ) {
+		my $res = $c->model( 'GLM' )->single_tag_subject_as_user( $tag, $id, $c->user->{gl_data}->{id} );
+		$c->response->body( 'tagged by user [' . $c->user->{gl_data}->{id} . ']' );
 
+	} else {
+		die "nope";
+	}
+}
+
+sub wishlist_subject : Local : Args(1) {
+	my ( $self, $c, $id ) = @_;
+
+	if ( $c->user->{gl_data}->{id} ) {
+		my $res = $c->model( 'GLM' )->add_subject_to_user_collection( $id, $c->user->{gl_data}->{id}, 'wishlist' );
+		$c->response->body( $res->{id} );
+	} else {
+		die "nope";
+	}
+}
+
+sub problem_subject : Local : Args(1) {
+	my ( $self, $c, $id ) = @_;
+
+	if ( $c->user->{gl_data}->{id} ) {
+		my $res = $c->model( 'GLM' )->add_subject_to_user_collection( $id, 1, 'problem' );
+		$c->response->body( $res->{id} );
 	} else {
 		die "nope";
 	}

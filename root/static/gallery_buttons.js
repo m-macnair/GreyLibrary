@@ -1,8 +1,11 @@
 
 
+
+
+
 function send_tag_string(tag_string,subject_id) {
 	get_url("/subject/api/tag_subject/" + subject_id + "/" + tag_string); 
-}
+}c
 
 function want(subject_id) {
 	send_tag_string('want',subject_id);
@@ -37,5 +40,22 @@ function tag_button (tag_string,subject_id) {
 function used_button (button_id_string) { 
 	this_button = document.getElementById(button_id_string);
 	this_button.disabled = true;
-	this_button.style.backgroundColor = "orange";
+	this_button.style.backgroundColor = "blue";
+}
+
+
+function get_url(button, target_url) {
+
+	fetch(target_url, {
+		method: 'GET',
+	})
+	.then(response => response.text())
+  .then(data => {
+		console.log('Success:', data);
+	})
+	.catch(error => {
+		console.error('Error:', error);
+		button.style.backgroundColor = '#f44336'; // red on error
+		button.style.color = '#fff';
+	});
 }

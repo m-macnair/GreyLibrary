@@ -1,11 +1,11 @@
-
+/*
 function get_url(this_url){
 	var xhr = new XMLHttpRequest(); 		
-	/* async is the default here, causing newb problems */
+	
 	xhr.open("GET", this_url, false);
 	xhr.send();
 	return xhr.response;
-}
+}*/
 
 
 async function async_get_url (this_url) {

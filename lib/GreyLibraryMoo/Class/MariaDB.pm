@@ -1,7 +1,7 @@
 # ABSTRACT : The System - in MariaDB
 package GreyLibraryMoo::Class::MariaDB;
-our $VERSION = 'v0.0.2';
-##~ DIGEST : 9d871e124e1a5addaa6a89f4cffefde6
+our $VERSION = 'v0.0.3';
+##~ DIGEST : 001659f63a9aee7a96a31895044e2888
 use Moo;
 
 #not sure Thumb should be here
@@ -9,6 +9,7 @@ with qw/
   GreyLibraryMoo::Role::Combine::DB::MariaDB
   GreyLibraryMoo::Role::Subject::Access
   GreyLibraryMoo::Role::Subject::Admin
+  GreyLibraryMoo::Role::Subject::Collect
   GreyLibraryMoo::Role::Thumb
   Moo::GenericRole::FileSystem
   Moo::GenericRole::Common::Core

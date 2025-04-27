@@ -265,3 +265,34 @@ textarea{
 	min-height:50px;
 	margin:1%;
 }
+
+
+
+.bottom-button {
+	height: 100%;
+	width: 40% !important;
+	margin-left:5% !important;
+	margin-right:5%!important;
+	float: left;
+	display: block;
+	text-align: center;
+	clear:none;
+	box-sizing: border-box;
+	border-radius: 5%;
+	border: none;
+}
+
+
+.heart-button {
+	background-color: pink; /* light pink */
+}
+.heart-button:hover {
+    background-color: lightpink; /* slightly darker pink on hover */
+}
+
+.problem-button {
+	background-color: orange; 
+}
+.problem-button:hover {
+    background-color: yellow;
+}

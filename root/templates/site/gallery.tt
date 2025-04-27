@@ -1,5 +1,7 @@
 <script type="text/javascript" src="/static/gallery.js"></script>
-[% PROCESS component/tag_buttons.tt %]
+<script type="text/javascript" src="/static/gallery_buttons.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/shared_static/shared_css/gl_main.css" />
+
 
 <div class="fancy_full box" style="min-height:600px">
 	<div class="full box" style="max-height:600px">

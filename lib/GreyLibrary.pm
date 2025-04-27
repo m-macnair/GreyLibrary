@@ -1,8 +1,8 @@
 package GreyLibrary;
 use strict;
 use warnings;
-our $VERSION = '0.07';
-##~ DIGEST : f87836d051255bc78a055c84521e3662
+our $VERSION = '0.08';
+##~ DIGEST : 6bbcd4048990d98152f2082ae0229acc
 use Moose;
 use namespace::autoclean;
 
@@ -50,7 +50,6 @@ __PACKAGE__->config(
 					client_secret => '',
 					scope         => 'identify',
 
-
 				},
 				store => {
 					class => 'Null',
@@ -60,7 +59,7 @@ __PACKAGE__->config(
 	},
 	'Plugin::Session' => {
 		flash_to_stash => 1,
-		expires        => 3600,
+		expires        => 60 * 60 * 24 * 7,
 		storage        => '/tmp/session',
 	}
 );

@@ -16,7 +16,14 @@
 		[%# INCLUDE want_button id = c.stash.subject_id %]
 		[%# INCLUDE problem_button id = c.stash.subject_id %]
 		[%# INCLUDE lewd_button id = c.stash.subject_id %]
-		<h1>Identification string : [% c.stash.subject_data.string %]</h1>
+		<h1>Identification string:</h1>
+		<h2>[% c.stash.subject_data.string %]</h2>
+
+	[% END %]
+	
+</div>
+
+[% BLOCK old_tags %]
 		<div class="full box" >
 			<div class="third_wide" >
 				[% FOREACH tag IN c.stash.tags_left %]
@@ -34,8 +41,4 @@
 				[% END %]
 			</div>
 		</div>
-	[% END %]
-	
-</div>
-
-
+[% END %]

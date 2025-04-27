@@ -1,13 +1,21 @@
-<div id="cell">
-<div id="cell_[% subject_id %]">
-	<h3>[% subject_id %]</h3>
-	
-	<div>
-	<a href="/subject/[% subject_id %]">
-		<img src="/[% thumb_file_path %]" style="height:300px;width:300px;float:left;"> </img>
-	</a>
-	
+
+<div id="cell" style="width:300px;height:360px; margin:5px;" style="float:left;clear:both;">
+<div style="margin:0px;">
+	<div id="cell_[% subject_id %]">
+		<h3>[% subject_id %]</h3>
+		<a href="/subject/[% subject_id %]">
+			<img src="/[% thumb_file_path %]" style="height:300px; width:300px; float:left;" />
+		</a>
+		<div style="height:50px">
+			<button 
+				class="bottom-button heart-button"
+				onclick="get_url(this,'/subject/api/wishlist_subject/[% subject_id %]')"
+			><3</button>
+			<button 
+				class="bottom-button problem-button"
+				onclick="get_url(this,'/subject/api/problem_subject/[% subject_id %]')"
+			>!</button>
+		</div>
 	</div>
-	
 </div>
 </div>

@@ -1,34 +1,44 @@
 package GreyLibrary::Controller::Root;
+our $VERSION = 'v1.0.1';
+
+##~ DIGEST : ea81b947163239271bc493482bc0550f
 use Moose;
 use namespace::autoclean;
 
 BEGIN { extends 'Catalyst::Controller' }
 
-#
-# Sets the actions in this controller to be registered with no prefix
-# so they function identically to actions created in MyApp.pm
-#
 __PACKAGE__->config( namespace => '' );
-
-# sub auto : Private {
-# 	my ( $self, $c ) = @_;
-#
-# 	unless ( $c->session->{user_id} || index( $c->request->uri, '/auth/web' ) > 0 ) {
-# 		$c->res->redirect( $c->uri_for( "/search/40k" ) );
-# 	}
-# }
-
-=head2 default
-
-Standard 404 error page
-
-=cut
 
 sub default : Path {
 	my ( $self, $c ) = @_;
-	$c->response->body( 'Page not found' );
+	$c->stash( template => '' );
+	$c->response->body( 'Denied.' );
+}
 
-	# 	$c->res->redirect( $c->uri_for( "/image/web/untagged" ) );
+sub auto : Private {
+	my ( $self, $c ) = @_;
+
+	# Allow unauthenticated users to reach the login page.  This
+	# allows unauthenticated users to reach any action in the Login
+	# controller.  To lock it down to a single action, we could use:
+	#   if ($c->action eq $c->controller('Login')->action_for('index'))
+	# to only allow unauthenticated access to the 'index' action we
+	# added above.
+	if (   $c->controller eq $c->controller( 'Auth' )
+		|| $c->controller eq $c->controller( 'Root' ) )
+	{
+		return 1;
+	}
+	if ( !$c->user() ) {
+		$c->log->debug( '***Root::auto User not found' );
+		$c->response->redirect( '/' );
+		$c->detach();
+	} else {
+		$c->log->debug( '***Root::auto User Found: ' . $c->user );
+	}
+
+	# User found, so return 1 to continue with processing after this 'auto'
+	return 1;
 }
 
 =head2 end

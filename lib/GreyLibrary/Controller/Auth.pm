@@ -1,7 +1,7 @@
 package GreyLibrary::Controller::Auth;
-our $VERSION = 'v1.0.2';
+our $VERSION = 'v1.0.3';
 
-##~ DIGEST : 67da4ed55e3fabc15ba2e081d18b1b23
+##~ DIGEST : d56a7f7eff03593144bc4386dd0aece3
 
 use Moose;
 use namespace::autoclean;
@@ -10,6 +10,8 @@ BEGIN { extends 'Catalyst::Controller'; }
 
 use Data::Dumper;
 use JSON qw//;
+
+#https://discord.com/oauth2/authorize?client_id=1293143804802760736&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Fdiscord&scope=identify
 
 sub discord : Path('/auth/discord/') : Args(0) {
 	my ( $self, $c ) = @_;
@@ -61,8 +63,10 @@ sub discord : Path('/auth/discord/') : Args(0) {
 			$token = $token_response->token();
 		}
 	}
+	$c->log->debug( "***Token:$token" );
 	if ( $c->user() && $c->user->{discord_data} ) {
-
+		$c->response->redirect( '/search' );
+		$c->detach();
 	} else {
 		if ( $token ) {
 
@@ -89,9 +93,11 @@ sub discord : Path('/auth/discord/') : Args(0) {
 					}
 				}
 				$c->user->{discord_data} = $discord_data;
-				warn Dumper( $c->user->{discord_data} );
+				$c->log->debug( "***Succesful discord authentication for $discord_data->{global_name}" );
+				$c->response->redirect( '/search' );
+				$c->detach();
 			} else {
-				die "Unhandled response from discord";
+				$c->log->debug( '***Unhandled response from discord' . Dumper( $res ) );
 			}
 		} else {
 			warn "Unable to retrieve/use Discord response token";
