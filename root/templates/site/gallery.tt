@@ -15,10 +15,19 @@
 			[% INCLUDE "component/gallery_four_cell_v2.tt" subject_id = row.subject_id thumb_file_path = row.thumb_file_path %]
 		[% END %]
 	</div>
-	<div>
+
 		[% IF c.stash.next_string   %]
-			<a href="[%c.stash.next_string %]">Next</a>
+			<a href="[%c.stash.next_string %]" style ='display: inline-block;
+			margin:2%;
+			margin-top:10%;
+
+			padding: 4%;
+			border-radius: 8px;
+			text-decoration: none;
+			border: 1px solid ;
+			width:90%;
+			transition: background 0.2s ease;'>Next</a>
 		[% END %]
-	</div>
+	
 </div>
 
